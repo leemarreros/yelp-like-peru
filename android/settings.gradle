@@ -1,0 +1,3 @@
+rootProject.name = 'YelpPeru'
+
+include ':app'
