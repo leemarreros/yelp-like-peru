@@ -12,6 +12,7 @@ import RestaurantList from "./RestaurantList";
 import { createStackNavigator } from "react-navigation";
 import { credentialGoogle } from "../keys";
 import { NavigationActions } from "react-navigation";
+import { generateLinkGoogle } from './utils';
 
 type Props = {};
 export default class Home extends Component<Props> {
@@ -41,7 +42,8 @@ export default class Home extends Component<Props> {
       onFocusInputBarFood,
       textQueryFood,
       lat,
-      long
+      long,
+      radius
     } = this.state;
 
     // clic on place search from list
@@ -53,7 +55,7 @@ export default class Home extends Component<Props> {
         onFocusInputBarFood: true
       });
 
-      fetch(this.generateLinkGoogle(item.place_id, "placeDetails"))
+      fetch(generateLinkGoogle(item.place_id, "placeDetails", {}, lat, long, radius))
         .then(data => data.json())
         .then(data => {
           const { lat, lng } = data.result.geometry.location;
@@ -79,7 +81,7 @@ export default class Home extends Component<Props> {
           fetch: {
             item,
             fetch: fetch(
-              this.generateLinkGoogle(item.place_id, "placeDetails")
+              generateLinkGoogle(item.place_id, "placeDetails", {}, lat, long, radius)
             ),
             fetching: true
           }
@@ -92,7 +94,7 @@ export default class Home extends Component<Props> {
         this.props.navigation.navigate("RestaurantList", {
           fetch: {
             fetch: fetch(
-              this.generateLinkGoogle(textQueryFood, "searchListFood")
+              generateLinkGoogle(textQueryFood, "searchListFood", {}, lat, long, radius)
             ),
             fetching: true,
             lat,
@@ -105,7 +107,8 @@ export default class Home extends Component<Props> {
   };
 
   fetchFoodListData = textQueryFood => {
-    fetch(this.generateLinkGoogle(textQueryFood, "food"))
+    const  { lat, long, radius } = this.state;
+    fetch(generateLinkGoogle(textQueryFood, "food", {}, lat, long, radius))
       .then(data => data.json())
       .then(data => {
         const currentListRender = data.predictions;
@@ -123,7 +126,8 @@ export default class Home extends Component<Props> {
   };
 
   fetchPlacesListData = (textQueryFood, type) => {
-    fetch(this.generateLinkGoogle(textQueryFood, type))
+    const { lat, long, radius } = this.state;
+    fetch(generateLinkGoogle(textQueryFood, type, {}, lat, long, radius))
       .then(data => data.json())
       .then(data => {
         const currentListRender = data.predictions;
@@ -183,8 +187,7 @@ export default class Home extends Component<Props> {
   };
 
   //  {  lat, lon } are keys that come from google api
-  generateLinkGoogle = (query, type, coords = {}) => {
-    const { lat, long, geolocationActive, textQueryPlace, radius } = this.state;
+  generateLinkGoogle = (query, type, coords = {}, lat, long, radius) => {
     const queryFixed = query.trim().replace(/  +/g, "+");
     if (type === "food") {
       // filter those resultst that don't have the place_id key within
@@ -221,7 +224,8 @@ export default class Home extends Component<Props> {
       long,
       geolocationActive,
       onClickPlaceSelected,
-      firstItemListPlace
+      firstItemListPlace,
+      radius
     } = this.state;
     // if place has been searched and selected
     // if food input is entered
@@ -235,7 +239,7 @@ export default class Home extends Component<Props> {
       this.props.navigation.navigate("RestaurantList", {
         fetch: {
           fetch: fetch(
-            this.generateLinkGoogle(textQueryFood, "searchListFood")
+            generateLinkGoogle(textQueryFood, "searchListFood", {}, lat, long, radius)
           ),
           fetching: true,
           lat,
@@ -255,16 +259,17 @@ export default class Home extends Component<Props> {
       // fetching list of restaurants
       const fetchingList = coords =>
         fetch(
-          this.generateLinkGoogle(
+          generateLinkGoogle(
             textQueryFood,
             "searchListFoodNoGeolocation",
-            coords
+            coords,
+            lat, long, radius
           )
         );
       // fetching coords
       // returns a promise with the list that'll resolve
       const fetchingCoords = fetch(
-        this.generateLinkGoogle(firstItemListPlace.place_id, "placeDetails")
+        generateLinkGoogle(firstItemListPlace.place_id, "placeDetails", {}, lat, long, radius)
       )
         .then(data => data.json())
         .then(data => {

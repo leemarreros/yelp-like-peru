@@ -9,6 +9,7 @@ import {
 } from "react-native";
 
 import Rating from "./Rating";
+import { generateLinkGoogle} from './utils.js';
 
 class DisplayItemList extends Component {
   state = {
@@ -43,9 +44,21 @@ class DisplayItemList extends Component {
       });
     }
   }
+  onClickRestListItem = () => {
+    const { item, lat, long } = this.props;
+    this.props.navigation.navigate("RestaurantPage", {
+      fetch: {
+        item,
+        fetch: fetch(
+          generateLinkGoogle(item.place_id, "placeDetails", {}, lat, long )
+        ),
+        fetching: true
+      }
+    });
+  }
   render() {
     // current location
-    const { item, lat, long } = this.props;
+    const { item, lat, long, radius } = this.props;
 
     // place's location
     const coords = item.geometry.location;
@@ -59,7 +72,9 @@ class DisplayItemList extends Component {
     const openNowExists = !!item.opening_hours;
 
     return (
-      <TouchableOpacity style={styles.itemDisplayWrapper}>
+      <TouchableOpacity
+      onPress={this.onClickRestListItem}
+      style={styles.itemDisplayWrapper}>
         <View style={styles.wrapperImage}>
           <Image
             style={styles.imageDisplayItemList}
@@ -108,18 +123,19 @@ export default class RestaurantList extends Component {
   };
 
   componentWillMount() {
-    const { fetch, fetching, lat, long } = this.props.navigation.getParam(
+    const { fetch, fetching, lat, long, generateLinkGoogle} = this.props.navigation.getParam(
       "fetch",
       {}
     );
     if (fetching) {
       fetch.then(data => data.json()).then(data => {
+
         this.setState(
           {
             completeList: [...data.results],
             nextPageToken: data.next_page_token || "",
             lat,
-            long
+            long,
           },
           this.handleLoadMore
         );
@@ -145,6 +161,7 @@ export default class RestaurantList extends Component {
               : "";
             return (
               <DisplayItemList
+                navigation={this.props.navigation}
                 item={item}
                 lat={this.state.lat}
                 long={this.state.long}
