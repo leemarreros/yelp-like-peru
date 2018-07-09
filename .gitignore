@@ -57,3 +57,6 @@ buck-out/
 
 # ignoring file with keys
 keys.js
+
+# ignoring ios/Pods
+ios/Pods/
