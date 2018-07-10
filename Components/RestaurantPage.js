@@ -6,7 +6,8 @@ import {
   FlatList,
   Image,
   Dimensions,
-  ScrollView
+  ScrollView,
+  TouchableOpacity
 } from "react-native";
 
 import Rating from "./Rating";
@@ -67,13 +68,23 @@ class RestaurantPage extends Component {
   state = {
     item: {},
     formatted_address: "",
-    geometry: {},
+    geometry: {location: { lat: -12.0498958, long: -77.0803742 }},
     name: "",
     photos: [],
     rating: "",
     reviews: [],
     international_phone_number: "",
-    opening_hours: {}
+    opening_hours: {},
+    region: {
+      latitude: -12.0498958,
+      longitude:-77.0803742,
+      latitudeDelta: 0.002,
+      longitudeDelta: 0.002
+    },
+    marker: {
+      latitude: -12.0498958,
+      longitude:-77.0803742
+    }
   };
   componentWillMount() {
     const { item, fetch, fetching } = this.props.navigation.getParam(
@@ -103,10 +114,23 @@ class RestaurantPage extends Component {
           rating,
           reviews,
           international_phone_number,
-          opening_hours
+          opening_hours,
+          region: {
+            latitude: geometry.location.lat,
+            longitude: geometry.location.lng,
+            latitudeDelta: 0.002,
+            longitudeDelta: 0.002
+          },
+          marker: {
+            latitude: geometry.location.lat,
+            longitude: geometry.location.lng,
+          }
         });
       });
     }
+  }
+  onRegionChange = (region) => {
+    this.setState({region})
   }
   render() {
     const {
@@ -144,16 +168,7 @@ class RestaurantPage extends Component {
         })}
       </View>
     );
-    const region = {
-      latitude: -12.0498958,
-      longitude: -77.0803742,
-      latitudeDelta: 0.0922,
-      longitudeDelta: 0.0421,
-    }
-    const marker = {
-  latitude: -12.0498958,
-  longitude: -77.0803742,
-}
+    
     return (
       <ScrollView style={styles.restaurantPage}>
         <PhotosCarousel style={styles.listImages} photos={photos} />
@@ -163,11 +178,12 @@ class RestaurantPage extends Component {
         <Text numberOfLines={1}>Dirección: {formatted_address}</Text>
         <Text numberOfLines={1}>Teléfono: {international_phone_number}</Text>
 
-        <View style={styles.mapView}>
+        <View style={styles.mapView} pointerEvents="none">
           <MapView
             style={styles.map}
-            region={region}>
-            <Marker coordinate={marker}/>
+            region={this.state.region}
+            onRegionChange={this.onRegionChange}>
+            <Marker coordinate={this.state.marker}/>
           </MapView>
         </View>
 
@@ -210,7 +226,7 @@ const styles = StyleSheet.create({
   },
   container: {
     ...StyleSheet.absoluteFillObject,
-    height: 400,
+    height: 200,
     width: 400,
     justifyContent: "flex-end",
     alignItems: "center"
@@ -219,7 +235,7 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject
   },
   mapView: {
-    height: 400,
+    height: 200,
     width: 400
   }
 });
