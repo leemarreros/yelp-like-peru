@@ -79,7 +79,6 @@ export default class Home extends Component<Props> {
       // if item is an establishment
       if (!!item.types && item.types.includes("establishment")) {
         // goes to page description
-        console.log("click on item");
         this.props.navigation.navigate("RestaurantPage", {
           fetch: {
             item,

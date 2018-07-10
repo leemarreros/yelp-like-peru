@@ -94,7 +94,6 @@ class RestaurantPage extends Component {
     this.setState({
       item
     });
-    console.log("RestaurantPage");
     if (fetching) {
       fetch.then(data => data.json()).then(data => {
         const {
@@ -107,7 +106,6 @@ class RestaurantPage extends Component {
           international_phone_number = "",
           opening_hours = {}
         } = data.result;
-        console.log("geometry", geometry);
         this.setState({
           formatted_address,
           geometry,
@@ -132,6 +130,15 @@ class RestaurantPage extends Component {
     }
   }
   onRegionChange = region => {};
+  showFullMapPage = () => {
+    this.props.navigation.navigate("FullMapPage", {
+      map: {
+        region: this.state.region,
+        marker: this.state.marker
+      },
+      name: this.state.name
+    });
+  };
   render() {
     const {
       itemData,
@@ -168,8 +175,7 @@ class RestaurantPage extends Component {
         })}
       </View>
     );
-    console.log("region", this.state.region);
-    console.log("marker", this.state.marker);
+
     return (
       <ScrollView style={styles.restaurantPage}>
         <PhotosCarousel style={styles.listImages} photos={photos} />
@@ -183,16 +189,18 @@ class RestaurantPage extends Component {
           <MapView
             provider={PROVIDER_GOOGLE}
             style={styles.map}
-            region={this.state.region}
-            onRegionChange={region => {
-              console.log(region);
-            }}>
+            region={this.state.region}>
             <Marker
               coordinate={this.state.marker}
               image={require("../img/place.png")}
             />
           </MapView>
         </View>
+        <TouchableOpacity
+          style={styles.seeFullMapButton}
+          onPress={this.showFullMapPage}>
+          <Text>Ver en Mapa</Text>
+        </TouchableOpacity>
 
         {reviews.length > 0 ? reviewsRender : null}
       </ScrollView>
@@ -244,12 +252,14 @@ const styles = StyleSheet.create({
     width: width,
     backgroundColor: "yellow"
   },
-
   mapView: {
     height: 200,
     backgroundColor: "yellow",
     width: width,
     justifyContent: "flex-end",
     alignItems: "center"
+  },
+  seeFullMapButton: {
+    flex: 1
   }
 });
