@@ -9,7 +9,7 @@ import {
 } from "react-native";
 
 import Rating from "./Rating";
-import { generateLinkGoogle} from './utils.js';
+import { generateLinkGoogle } from "./utils.js";
 
 class DisplayItemList extends Component {
   state = {
@@ -18,7 +18,7 @@ class DisplayItemList extends Component {
   };
   getDistance = (p1, p2) => {
     const rad = x => {
-      return x * Math.PI / 180;
+      return (x * Math.PI) / 180;
     };
     var R = 6378137; // Earth’s mean radius in meter
     var dLat = rad(p2.lat - p1.lat);
@@ -50,12 +50,12 @@ class DisplayItemList extends Component {
       fetch: {
         item,
         fetch: fetch(
-          generateLinkGoogle(item.place_id, "placeDetails", {}, lat, long )
+          generateLinkGoogle(item.place_id, "placeDetails", {}, lat, long)
         ),
         fetching: true
       }
     });
-  }
+  };
   render() {
     // current location
     const { item, lat, long, radius } = this.props;
@@ -73,8 +73,8 @@ class DisplayItemList extends Component {
 
     return (
       <TouchableOpacity
-      onPress={this.onClickRestListItem}
-      style={styles.itemDisplayWrapper}>
+        onPress={this.onClickRestListItem}
+        style={styles.itemDisplayWrapper}>
         <View style={styles.wrapperImage}>
           <Image
             style={styles.imageDisplayItemList}
@@ -123,19 +123,21 @@ export default class RestaurantList extends Component {
   };
 
   componentWillMount() {
-    const { fetch, fetching, lat, long, generateLinkGoogle} = this.props.navigation.getParam(
-      "fetch",
-      {}
-    );
+    const {
+      fetch,
+      fetching,
+      lat,
+      long,
+      generateLinkGoogle
+    } = this.props.navigation.getParam("fetch", {});
     if (fetching) {
       fetch.then(data => data.json()).then(data => {
-
         this.setState(
           {
             completeList: [...data.results],
             nextPageToken: data.next_page_token || "",
             lat,
-            long,
+            long
           },
           this.handleLoadMore
         );

@@ -16,6 +16,17 @@ import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
 
 var { height, width } = Dimensions.get("window");
 
+class LogoTitle extends React.Component {
+  render() {
+    return (
+      <Image
+        source={require("../img/logoTop.png")}
+        style={{ width: 50, height: 50 }}
+      />
+    );
+  }
+}
+
 class PhotosCarousel extends Component {
   state = {
     imageUrl:
@@ -65,6 +76,14 @@ class PhotosCarousel extends Component {
 }
 
 class RestaurantPage extends Component {
+  static navigationOptions = {
+    // headerTitle instead of title
+    headerTitle: <LogoTitle />,
+    headerStyle: {
+      backgroundColor: "#BC070A"
+    }
+  };
+
   state = {
     item: {},
     formatted_address: "",
@@ -106,6 +125,7 @@ class RestaurantPage extends Component {
           international_phone_number = "",
           opening_hours = {}
         } = data.result;
+        console.log("data.result", data.result);
         this.setState({
           formatted_address,
           geometry,
@@ -180,6 +200,7 @@ class RestaurantPage extends Component {
       <ScrollView style={styles.restaurantPage}>
         <PhotosCarousel style={styles.listImages} photos={photos} />
         <Text style={styles.nameRestaurant}>{name}</Text>
+
         <Rating rating={rating} style={styles.ratingWrapper} />
         <Text>Esta {opening_hours.open_now ? "abierto" : "cerrado"} ahora</Text>
         <Text numberOfLines={1}>Dirección: {formatted_address}</Text>
@@ -226,8 +247,12 @@ const styles = StyleSheet.create({
     width: width
   },
   nameRestaurant: {
-    fontSize: 40,
-    textAlign: "center"
+    fontSize: 35,
+    marginTop: 13,
+    marginBottom: 13,
+    color: "#BC070A",
+    textAlign: "center",
+    fontFamily: "Helvetica-Bold"
   },
   ratingWrapper: {},
   wrapEachReview: {
