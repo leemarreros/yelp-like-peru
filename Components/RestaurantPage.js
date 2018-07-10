@@ -11,7 +11,7 @@ import {
 
 import Rating from "./Rating";
 import { credentialGoogle } from "../keys";
-import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
+import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
 
 var { height, width } = Dimensions.get("window");
 
@@ -144,6 +144,16 @@ class RestaurantPage extends Component {
         })}
       </View>
     );
+    const region = {
+      latitude: -12.0498958,
+      longitude: -77.0803742,
+      latitudeDelta: 0.0922,
+      longitudeDelta: 0.0421,
+    }
+    const marker = {
+  latitude: -12.0498958,
+  longitude: -77.0803742,
+}
     return (
       <ScrollView style={styles.restaurantPage}>
         <PhotosCarousel style={styles.listImages} photos={photos} />
@@ -152,7 +162,15 @@ class RestaurantPage extends Component {
         <Text>Esta {opening_hours.open_now ? "abierto" : "cerrado"} ahora</Text>
         <Text numberOfLines={1}>Dirección: {formatted_address}</Text>
         <Text numberOfLines={1}>Teléfono: {international_phone_number}</Text>
-        
+
+        <View style={styles.mapView}>
+          <MapView
+            style={styles.map}
+            region={region}>
+            <Marker coordinate={marker}/>
+          </MapView>
+        </View>
+
         {reviews.length > 0 ? reviewsRender : null}
       </ScrollView>
     );
@@ -199,5 +217,9 @@ const styles = StyleSheet.create({
   },
   map: {
     ...StyleSheet.absoluteFillObject
+  },
+  mapView: {
+    height: 400,
+    width: 400
   }
 });
