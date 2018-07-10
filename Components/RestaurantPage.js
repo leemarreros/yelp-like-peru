@@ -68,7 +68,7 @@ class RestaurantPage extends Component {
   state = {
     item: {},
     formatted_address: "",
-    geometry: {location: { lat: -12.0498958, long: -77.0803742 }},
+    geometry: { location: { lat: -12.0498958, long: -77.0803742 } },
     name: "",
     photos: [],
     rating: "",
@@ -77,13 +77,13 @@ class RestaurantPage extends Component {
     opening_hours: {},
     region: {
       latitude: -12.0498958,
-      longitude:-77.0803742,
+      longitude: -77.0803742,
       latitudeDelta: 0.002,
       longitudeDelta: 0.002
     },
     marker: {
       latitude: -12.0498958,
-      longitude:-77.0803742
+      longitude: -77.0803742
     }
   };
   componentWillMount() {
@@ -94,6 +94,7 @@ class RestaurantPage extends Component {
     this.setState({
       item
     });
+    console.log("RestaurantPage");
     if (fetching) {
       fetch.then(data => data.json()).then(data => {
         const {
@@ -106,6 +107,7 @@ class RestaurantPage extends Component {
           international_phone_number = "",
           opening_hours = {}
         } = data.result;
+        console.log("geometry", geometry);
         this.setState({
           formatted_address,
           geometry,
@@ -123,15 +125,13 @@ class RestaurantPage extends Component {
           },
           marker: {
             latitude: geometry.location.lat,
-            longitude: geometry.location.lng,
+            longitude: geometry.location.lng
           }
         });
       });
     }
   }
-  onRegionChange = (region) => {
-    this.setState({region})
-  }
+  onRegionChange = region => {};
   render() {
     const {
       itemData,
@@ -168,7 +168,8 @@ class RestaurantPage extends Component {
         })}
       </View>
     );
-    
+    console.log("region", this.state.region);
+    console.log("marker", this.state.marker);
     return (
       <ScrollView style={styles.restaurantPage}>
         <PhotosCarousel style={styles.listImages} photos={photos} />
@@ -180,10 +181,16 @@ class RestaurantPage extends Component {
 
         <View style={styles.mapView} pointerEvents="none">
           <MapView
+            provider={PROVIDER_GOOGLE}
             style={styles.map}
             region={this.state.region}
-            onRegionChange={this.onRegionChange}>
-            <Marker coordinate={this.state.marker}/>
+            onRegionChange={region => {
+              console.log(region);
+            }}>
+            <Marker
+              coordinate={this.state.marker}
+              image={require("../img/place.png")}
+            />
           </MapView>
         </View>
 
@@ -227,15 +234,22 @@ const styles = StyleSheet.create({
   container: {
     ...StyleSheet.absoluteFillObject,
     height: 200,
-    width: 400,
+    width: width,
     justifyContent: "flex-end",
-    alignItems: "center"
+    alignItems: "center",
+    backgroundColor: "yellow"
   },
   map: {
-    ...StyleSheet.absoluteFillObject
+    ...StyleSheet.absoluteFillObject,
+    width: width,
+    backgroundColor: "yellow"
   },
+
   mapView: {
     height: 200,
-    width: 400
+    backgroundColor: "yellow",
+    width: width,
+    justifyContent: "flex-end",
+    alignItems: "center"
   }
 });

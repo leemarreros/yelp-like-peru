@@ -12,7 +12,7 @@ import RestaurantList from "./RestaurantList";
 import { createStackNavigator } from "react-navigation";
 import { credentialGoogle } from "../keys";
 import { NavigationActions } from "react-navigation";
-import { generateLinkGoogle } from './utils';
+import { generateLinkGoogle } from "./utils";
 
 type Props = {};
 export default class Home extends Component<Props> {
@@ -55,7 +55,9 @@ export default class Home extends Component<Props> {
         onFocusInputBarFood: true
       });
 
-      fetch(generateLinkGoogle(item.place_id, "placeDetails", {}, lat, long, radius))
+      fetch(
+        generateLinkGoogle(item.place_id, "placeDetails", {}, lat, long, radius)
+      )
         .then(data => data.json())
         .then(data => {
           const { lat, lng } = data.result.geometry.location;
@@ -77,11 +79,19 @@ export default class Home extends Component<Props> {
       // if item is an establishment
       if (!!item.types && item.types.includes("establishment")) {
         // goes to page description
+        console.log("click on item");
         this.props.navigation.navigate("RestaurantPage", {
           fetch: {
             item,
             fetch: fetch(
-              generateLinkGoogle(item.place_id, "placeDetails", {}, lat, long, radius)
+              generateLinkGoogle(
+                item.place_id,
+                "placeDetails",
+                {},
+                lat,
+                long,
+                radius
+              )
             ),
             fetching: true
           }
@@ -94,7 +104,14 @@ export default class Home extends Component<Props> {
         this.props.navigation.navigate("RestaurantList", {
           fetch: {
             fetch: fetch(
-              generateLinkGoogle(textQueryFood, "searchListFood", {}, lat, long, radius)
+              generateLinkGoogle(
+                textQueryFood,
+                "searchListFood",
+                {},
+                lat,
+                long,
+                radius
+              )
             ),
             fetching: true,
             lat,
@@ -107,7 +124,7 @@ export default class Home extends Component<Props> {
   };
 
   fetchFoodListData = textQueryFood => {
-    const  { lat, long, radius } = this.state;
+    const { lat, long, radius } = this.state;
     fetch(generateLinkGoogle(textQueryFood, "food", {}, lat, long, radius))
       .then(data => data.json())
       .then(data => {
@@ -239,7 +256,14 @@ export default class Home extends Component<Props> {
       this.props.navigation.navigate("RestaurantList", {
         fetch: {
           fetch: fetch(
-            generateLinkGoogle(textQueryFood, "searchListFood", {}, lat, long, radius)
+            generateLinkGoogle(
+              textQueryFood,
+              "searchListFood",
+              {},
+              lat,
+              long,
+              radius
+            )
           ),
           fetching: true,
           lat,
@@ -263,13 +287,22 @@ export default class Home extends Component<Props> {
             textQueryFood,
             "searchListFoodNoGeolocation",
             coords,
-            lat, long, radius
+            lat,
+            long,
+            radius
           )
         );
       // fetching coords
       // returns a promise with the list that'll resolve
       const fetchingCoords = fetch(
-        generateLinkGoogle(firstItemListPlace.place_id, "placeDetails", {}, lat, long, radius)
+        generateLinkGoogle(
+          firstItemListPlace.place_id,
+          "placeDetails",
+          {},
+          lat,
+          long,
+          radius
+        )
       )
         .then(data => data.json())
         .then(data => {
