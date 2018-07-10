@@ -11,7 +11,6 @@ import {
 
 import Rating from "./Rating";
 import { credentialGoogle } from "../keys";
-import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 
 var { height, width } = Dimensions.get("window");
 
@@ -152,7 +151,7 @@ class RestaurantPage extends Component {
         <Text>Esta {opening_hours.open_now ? "abierto" : "cerrado"} ahora</Text>
         <Text numberOfLines={1}>Dirección: {formatted_address}</Text>
         <Text numberOfLines={1}>Teléfono: {international_phone_number}</Text>
-        
+
         {reviews.length > 0 ? reviewsRender : null}
       </ScrollView>
     );
@@ -189,15 +188,5 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     flex: 1
-  },
-  container: {
-    ...StyleSheet.absoluteFillObject,
-    height: 400,
-    width: 400,
-    justifyContent: "flex-end",
-    alignItems: "center"
-  },
-  map: {
-    ...StyleSheet.absoluteFillObject
   }
 });

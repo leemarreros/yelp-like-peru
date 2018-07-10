@@ -12,10 +12,13 @@
       android:icon="@mipmap/ic_launcher"
       android:allowBackup="false"
       android:theme="@style/AppTheme">
+<<<<<<< HEAD
         <meta-data
             android:name="com.google.android.geo.API_KEY"
 
             android:value="@string/google_api_key"/>
+=======
+>>>>>>> parent of d4fac27... react native map added to both platforms
       <activity
         android:name=".MainActivity"
         android:label="@string/app_name"
