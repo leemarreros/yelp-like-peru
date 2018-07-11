@@ -9,7 +9,9 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View
+  View,
+  Linking,
+  Alert
 } from "react-native";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 
@@ -18,10 +20,12 @@ var { height, width } = Dimensions.get("window");
 class LogoTitle extends React.Component {
   render() {
     return (
-      <Image
-        source={require("../img/logoTop.png")}
-        style={{ width: 50, height: 50 }}
-      />
+      <View style={styles.wrapperIconTitle}>
+        <Image
+          source={require("../img/logoTop.png")}
+          style={styles.logoTitle}
+        />
+      </View>
     );
   }
 }
@@ -159,7 +163,15 @@ class RestaurantPage extends Component {
     });
   };
 
-  triggerPhoneCall = () => {};
+  triggerPhoneCall = number => {
+    if (number === "") {
+      Alert.alert("Número de teléfono", "No encontrado", [{ text: "OK" }], {
+        cancelable: false
+      });
+      return;
+    }
+    Linking.openURL(`tel:${number}`);
+  };
 
   render() {
     const {
@@ -193,7 +205,7 @@ class RestaurantPage extends Component {
                   </Text>
                 </Text>
                 <Rating rating={review.rating} />
-                <Text numberOfLines={4}>{review.text}</Text>
+                <Text>{review.text}</Text>
               </View>
             </View>
           );
@@ -207,11 +219,7 @@ class RestaurantPage extends Component {
         <PhotosCarousel style={styles.listImages} photos={photos} />
         <Text style={styles.nameRestaurant}>{name}</Text>
         <View style={styles.centerTextContainer}>
-          {" "}
-          // container
           <View style={styles.centerTextLeft}>
-            {" "}
-            // left
             <View style={styles.containerCal}>
               <Text style={[styles.fontLeft]}>CALIFICACIÓN</Text>
             </View>
@@ -237,8 +245,6 @@ class RestaurantPage extends Component {
             </View>
           </View>
           <View style={styles.centerTextRight}>
-            {" "}
-            // right
             <View style={styles.ratingWrapper}>
               <Rating rating={rating} />
             </View>
@@ -248,9 +254,9 @@ class RestaurantPage extends Component {
                   styles.openTextRight,
                   opening_hours.open_now ? styles.openNow : styles.closeNow
                 ]}>
-                {opening_hours.weekday_text[dayOfDate]} ({opening_hours.open_now
-                  ? "Abierto"
-                  : "Cerrado"})
+                {!!opening_hours.weekday_text &&
+                  opening_hours.weekday_text[dayOfDate]}{" "}
+                ({opening_hours.open_now ? "Abierto" : "Cerrado"})
               </Text>
             </View>
             <View style={styles.addressTextWrapper}>
@@ -286,7 +292,7 @@ class RestaurantPage extends Component {
 
         <TouchableOpacity
           style={styles.llamarButton}
-          onPress={this.triggerPhoneCall}>
+          onPress={() => this.triggerPhoneCall(international_phone_number)}>
           <Image
             resizeMode="contain"
             style={styles.imageHorario}
@@ -304,6 +310,15 @@ class RestaurantPage extends Component {
 export default RestaurantPage;
 
 const styles = StyleSheet.create({
+  wrapperIconTitle: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  logoTitle: {
+    width: 50,
+    height: 50
+  },
   restaurantPage: {
     flex: 1,
     backgroundColor: "white"
@@ -383,7 +398,7 @@ const styles = StyleSheet.create({
     marginVertical: 4,
     alignItems: "center",
     alignSelf: "stretch",
-    justifyContent: "space-around"
+    justifyContent: "center"
   },
   imageHorario: {
     width: 27,
@@ -394,7 +409,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginVertical: 4,
     alignItems: "center",
-    justifyContent: "space-around",
+    justifyContent: "center",
     alignSelf: "stretch"
   },
   centerTextRight: {
@@ -459,7 +474,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginBottom: 10,
     paddingBottom: 10,
-    borderBottomWidth: 1,
+    borderBottomWidth: 0.5,
     borderBottomColor: "black"
   },
   reviewsTitle: {
