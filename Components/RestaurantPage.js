@@ -141,6 +141,8 @@ class RestaurantPage extends Component {
   }
 
   showFullMapPage = () => {
+    console.log("showFullMapPage", this.state.marker, this.state.region);
+
     this.props.navigation.navigate("FullMapPage", {
       map: {
         region: this.state.region,
@@ -329,17 +331,14 @@ const styles = StyleSheet.create({
     height: 200,
     width: width,
     justifyContent: "flex-end",
-    alignItems: "center",
-    backgroundColor: "yellow"
+    alignItems: "center"
   },
   map: {
     ...StyleSheet.absoluteFillObject,
-    width: width,
-    backgroundColor: "yellow"
+    width: width
   },
   mapView: {
     height: 200,
-    backgroundColor: "yellow",
     width: width,
     justifyContent: "flex-end",
     alignItems: "center"

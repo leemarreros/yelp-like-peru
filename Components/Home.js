@@ -377,7 +377,5 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#d11a1c"
   },
-  bodyResultsContainer: {
-    backgroundColor: "yellow"
-  }
+  bodyResultsContainer: {}
 });

@@ -14,11 +14,10 @@ import {
 class StatusBarWrap extends Component {
   render() {
     const height = Platform.OS === "ios" ? 20 : 0;
-    const { backgroundColor } = "yellow";
 
     return (
-      <View style={{ height, backgroundColor }}>
-        <StatusBar backgroundColor="#d8181c" />
+      <View style={{ height }}>
+        <StatusBar backgroundColor="#BC070A" />
       </View>
     );
   }
@@ -52,8 +51,7 @@ class IconBrandAndButtons extends Component {
         style={[
           styles.iconBrandWrapper,
           showButtonsBool ? styles.iconBrandWrapperActive : null
-        ]}
-      >
+        ]}>
         {showButtonsBool ? buttons : imageBrand}
       </View>
     );
@@ -171,7 +169,8 @@ export default Header;
 const styles = StyleSheet.create({
   headerContainer: {
     flexDirection: "column",
-    height: 150
+    height: 150,
+    backgroundColor: "#BC070A"
   },
   iconBrandWrapper: {
     flex: 1,
