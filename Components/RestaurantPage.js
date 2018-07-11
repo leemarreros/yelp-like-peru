@@ -175,23 +175,26 @@ class RestaurantPage extends Component {
     } = this.state;
 
     const reviewsRender = (
-      <View>
-        <Text style={{ textAlign: "center", fontWeight: "bold" }}>Reviews</Text>
+      <View style={styles.reviewsBlock}>
+        <Text style={styles.reviewsTitle}>COMENTARIOS</Text>
         {reviews.map((review, i) => {
           return (
             <View key={i} style={styles.wrapEachReview}>
-              <Image
-                style={styles.avatarAuthor}
-                source={{ uri: review.profile_photo_url }}
-              />
-
-              <Text numberOfLines={1}>
-                <Text style={{ fontWeight: "bold" }}>
-                  {review.author_name} {review.rating}
+              <View style={styles.leftSideReview}>
+                <Image
+                  style={styles.avatarAuthor}
+                  source={{ uri: review.profile_photo_url }}
+                />
+              </View>
+              <View style={styles.rightSideReview}>
+                <Text numberOfLines={1}>
+                  <Text style={{ fontWeight: "bold" }}>
+                    {review.author_name} {review.rating}
+                  </Text>
                 </Text>
-              </Text>
-              <Rating rating={review.rating} />
-              <Text>{review.text}</Text>
+                <Rating rating={review.rating} />
+                <Text numberOfLines={4}>{review.text}</Text>
+              </View>
             </View>
           );
         })}
@@ -328,14 +331,6 @@ const styles = StyleSheet.create({
     flex: 2,
     justifyContent: "center"
   },
-  wrapEachReview: {
-    flex: 1
-  },
-  avatarAuthor: {
-    width: 50,
-    height: 50,
-    flex: 1
-  },
   container: {
     ...StyleSheet.absoluteFillObject,
     height: 200,
@@ -454,5 +449,38 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     height: 35
+  },
+  reviewsBlock: {
+    flex: 1,
+    paddingTop: 20,
+    marginHorizontal: 15
+  },
+  wrapEachReview: {
+    flexDirection: "row",
+    marginBottom: 10,
+    paddingBottom: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: "black"
+  },
+  reviewsTitle: {
+    textAlign: "left",
+    fontWeight: "bold",
+    color: "#BC070A",
+    paddingBottom: 10
+  },
+  leftSideReview: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  avatarAuthor: {
+    flex: 1,
+    width: 50,
+    height: 50,
+    resizeMode: "contain"
+  },
+  rightSideReview: {
+    paddingRight: 10,
+    flex: 4
   }
 });
