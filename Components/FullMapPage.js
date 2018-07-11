@@ -68,7 +68,7 @@ export default class FullMapPage extends Component {
         Linking.openURL(url);
         return;
       }
-      Alert.alert("Error", "No se puede redirigir.", [{ text: "OK" }], {
+      Alert.alert("Error", "¡No se puede redirigir!", [{ text: "OK" }], {
         cancelable: false
       });
     });
