@@ -88,7 +88,12 @@ class DisplayItemList extends Component {
             {item.name}
           </Text>
           {openNowExists ? (
-            <Text>
+            <Text
+              style={[
+                item.opening_hours.open_now
+                  ? styles.openNowText
+                  : styles.closeNowText
+              ]}>
               Está {item.opening_hours.open_now ? "abierto" : "cerrado"}
             </Text>
           ) : (
@@ -189,23 +194,29 @@ const styles = StyleSheet.create({
     minHeight: 100,
     flex: 1,
     flexDirection: "row",
-    borderWidth: 0.5,
-    borderBottomColor: "grey"
+    borderBottomWidth: 1,
+    borderBottomColor: "#BC070A",
+    marginHorizontal: 10,
+    marginBottom: 6,
+    paddingBottom: 6
   },
   wrapperImage: {
     flex: 1,
-    padding: 8,
+    padding: 4,
     borderRadius: 5
   },
   wrapperText: {
-    flex: 3
+    flex: 3,
+    marginLeft: 2
   },
   imageDisplayItemList: {
     flex: 1
   },
   titleRest: {
     fontSize: 17,
-    fontWeight: "bold"
+    fontWeight: "bold",
+    fontFamily: "Helvetica",
+    color: "#BC070A"
   },
   wrapperStars: {
     flexDirection: "row"
@@ -213,5 +224,11 @@ const styles = StyleSheet.create({
   ratingStart: {
     height: 15,
     width: 15
+  },
+  openNowText: {
+    color: "#51a953"
+  },
+  closeNow: {
+    color: "#51a953"
   }
 });
