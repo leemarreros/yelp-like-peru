@@ -9,6 +9,8 @@ import {
 } from "react-native";
 
 import Rating from "./Rating";
+import LogoTitle from "./LogoTitle";
+
 import { generateLinkGoogle } from "./utils.js";
 
 class DisplayItemList extends Component {
@@ -109,6 +111,14 @@ class DisplayItemList extends Component {
 }
 
 export default class RestaurantList extends Component {
+  static navigationOptions = {
+    // headerTitle instead of title
+    headerTitle: <LogoTitle />,
+    headerStyle: {
+      backgroundColor: "#BC070A"
+    }
+  };
+
   state = {
     partialRestaurantList: [],
     completeList: [],

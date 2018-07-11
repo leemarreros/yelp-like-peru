@@ -14,21 +14,8 @@ import {
   Alert
 } from "react-native";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
-
+import LogoTitle from "./LogoTitle";
 var { height, width } = Dimensions.get("window");
-
-class LogoTitle extends React.Component {
-  render() {
-    return (
-      <View style={styles.wrapperIconTitle}>
-        <Image
-          source={require("../img/logoTop.png")}
-          style={styles.logoTitle}
-        />
-      </View>
-    );
-  }
-}
 
 class PhotosCarousel extends Component {
   state = {
@@ -310,15 +297,6 @@ class RestaurantPage extends Component {
 export default RestaurantPage;
 
 const styles = StyleSheet.create({
-  wrapperIconTitle: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  logoTitle: {
-    width: 50,
-    height: 50
-  },
   restaurantPage: {
     flex: 1,
     backgroundColor: "white"
