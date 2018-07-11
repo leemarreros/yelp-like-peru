@@ -1,18 +1,17 @@
+import { credentialGoogle } from "../keys";
+import Rating from "./Rating";
 import React, { Component } from "react";
 import {
-  View,
-  Text,
-  StyleSheet,
+  Dimensions,
   FlatList,
   Image,
-  Dimensions,
   ScrollView,
-  TouchableOpacity
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
 } from "react-native";
-
-import Rating from "./Rating";
-import { credentialGoogle } from "../keys";
-import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
+import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 
 var { height, width } = Dimensions.get("window");
 
@@ -93,7 +92,7 @@ class RestaurantPage extends Component {
     rating: "",
     reviews: [],
     international_phone_number: "",
-    opening_hours: {},
+    opening_hours: { open_now: true, weekday_text: [] },
     region: {
       latitude: -12.0498958,
       longitude: -77.0803742,
@@ -149,7 +148,7 @@ class RestaurantPage extends Component {
       });
     }
   }
-  onRegionChange = region => {};
+
   showFullMapPage = () => {
     this.props.navigation.navigate("FullMapPage", {
       map: {
@@ -159,6 +158,9 @@ class RestaurantPage extends Component {
       name: this.state.name
     });
   };
+
+  triggerPhoneCall = () => {};
+
   render() {
     const {
       itemData,
@@ -195,16 +197,66 @@ class RestaurantPage extends Component {
         })}
       </View>
     );
-
+    let today = new Date().getDay();
+    const dayOfDate = today > 0 ? today - 1 : 6;
     return (
       <ScrollView style={styles.restaurantPage}>
         <PhotosCarousel style={styles.listImages} photos={photos} />
         <Text style={styles.nameRestaurant}>{name}</Text>
-
-        <Rating rating={rating} style={styles.ratingWrapper} />
-        <Text>Esta {opening_hours.open_now ? "abierto" : "cerrado"} ahora</Text>
-        <Text numberOfLines={1}>Dirección: {formatted_address}</Text>
-        <Text numberOfLines={1}>Teléfono: {international_phone_number}</Text>
+        <View style={styles.centerTextContainer}>
+          {" "}
+          // container
+          <View style={styles.centerTextLeft}>
+            {" "}
+            // left
+            <View style={styles.containerCal}>
+              <Text style={[styles.fontLeft]}>CALIFICACIÓN</Text>
+            </View>
+            <View style={styles.containerHorario}>
+              <Image
+                resizeMode="contain"
+                style={styles.imageHorario}
+                source={require("../img/clock.png")}
+              />
+              <Text style={styles.fontLeft}>HORARIO</Text>
+            </View>
+            <View style={styles.containerLug}>
+              <View>
+                <Image
+                  resizeMode="contain"
+                  style={styles.imageHorario}
+                  source={require("../img/place.png")}
+                />
+              </View>
+              <View>
+                <Text style={styles.fontLeft}>LUGAR</Text>
+              </View>
+            </View>
+          </View>
+          <View style={styles.centerTextRight}>
+            {" "}
+            // right
+            <View style={styles.ratingWrapper}>
+              <Rating rating={rating} />
+            </View>
+            <View style={styles.openTextWrapper}>
+              <Text
+                style={[
+                  styles.openTextRight,
+                  opening_hours.open_now ? styles.openNow : styles.closeNow
+                ]}>
+                {opening_hours.weekday_text[dayOfDate]} ({opening_hours.open_now
+                  ? "Abierto"
+                  : "Cerrado"})
+              </Text>
+            </View>
+            <View style={styles.addressTextWrapper}>
+              <Text style={styles.addressTextRight} numberOfLines={2}>
+                {formatted_address}
+              </Text>
+            </View>
+          </View>
+        </View>
 
         <View style={styles.mapView} pointerEvents="none">
           <MapView
@@ -217,10 +269,27 @@ class RestaurantPage extends Component {
             />
           </MapView>
         </View>
+
         <TouchableOpacity
           style={styles.seeFullMapButton}
           onPress={this.showFullMapPage}>
-          <Text>Ver en Mapa</Text>
+          <Image
+            resizeMode="contain"
+            style={styles.imageHorario}
+            source={require("../img/place.png")}
+          />
+          <Text style={styles.textFullMapB}>VER EN MAPA</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.llamarButton}
+          onPress={this.triggerPhoneCall}>
+          <Image
+            resizeMode="contain"
+            style={styles.imageHorario}
+            source={require("../img/place.png")}
+          />
+          <Text style={styles.textFullMapB}>LLAMAR</Text>
         </TouchableOpacity>
 
         {reviews.length > 0 ? reviewsRender : null}
@@ -233,7 +302,8 @@ export default RestaurantPage;
 
 const styles = StyleSheet.create({
   restaurantPage: {
-    flex: 1
+    flex: 1,
+    backgroundColor: "white"
   },
   listImages: {
     flex: 1,
@@ -254,10 +324,12 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontFamily: "Helvetica-Bold"
   },
-  ratingWrapper: {},
+  ratingWrapper: {
+    flex: 2,
+    justifyContent: "center"
+  },
   wrapEachReview: {
-    flex: 1,
-    backgroundColor: "grey"
+    flex: 1
   },
   avatarAuthor: {
     width: 50,
@@ -284,7 +356,103 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     alignItems: "center"
   },
+  centerTextContainer: {
+    flexDirection: "row",
+    marginLeft: 20,
+    marginRight: 25,
+    marginBottom: 25
+  },
+  centerTextLeft: {
+    flex: 3,
+    flexDirection: "column",
+    borderRightWidth: 1,
+    borderColor: "#BC070A",
+    paddingRight: 4,
+    alignItems: "flex-end",
+    justifyContent: "space-around"
+  },
+  containerCal: {
+    flex: 1,
+    marginVertical: 6
+  },
+  fontLeft: {
+    fontStyle: "italic",
+    fontFamily: "Helvetica",
+    fontSize: 16,
+    textAlign: "right",
+    fontWeight: "200",
+    paddingRight: 5
+  },
+  containerHorario: {
+    flexDirection: "row",
+    marginVertical: 4,
+    alignItems: "center",
+    alignSelf: "stretch",
+    justifyContent: "space-around"
+  },
+  imageHorario: {
+    width: 27,
+    height: 27
+  },
+  containerLug: {
+    flex: 1,
+    flexDirection: "row",
+    marginVertical: 4,
+    alignItems: "center",
+    justifyContent: "space-around",
+    alignSelf: "stretch"
+  },
+  centerTextRight: {
+    flex: 5,
+    paddingLeft: 7,
+    flexDirection: "column",
+    justifyContent: "space-between",
+    alignItems: "flex-start"
+  },
+  openTextWrapper: {
+    flex: 2,
+    justifyContent: "center"
+  },
+  openNow: {
+    color: "#51a953"
+  },
+  closeNow: {
+    color: "#BC070A"
+  },
+  openTextRight: {
+    fontFamily: "Helvetica",
+    fontSize: 13
+  },
+  addressTextWrapper: {
+    flex: 1,
+    justifyContent: "center",
+    margin: 0,
+    padding: 0
+  },
+  addressTextRight: {
+    fontFamily: "Helvetica",
+    fontSize: 12,
+    overflow: "hidden"
+  },
   seeFullMapButton: {
-    flex: 1
+    flex: 1,
+    backgroundColor: "black",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    height: 35
+  },
+  textFullMapB: {
+    textAlign: "center",
+    color: "white",
+    fontWeight: "bold"
+  },
+  llamarButton: {
+    flex: 1,
+    backgroundColor: "#BC070A",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    height: 35
   }
 });
