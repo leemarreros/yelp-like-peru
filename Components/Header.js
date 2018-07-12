@@ -17,7 +17,7 @@ class StatusBarWrap extends Component {
 
     return (
       <View style={{ height }}>
-        <StatusBar backgroundColor="#BC070A" />
+        <StatusBar barStyle="light-content" backgroundColor="#BC070A" />
       </View>
     );
   }
@@ -80,7 +80,7 @@ class SearchBarFood extends Component {
           />
           <Image
             style={styles.iconInSearchBar}
-            source={require("../img/zoom.png")}
+            source={require("../img/zoom-i.png")}
           />
         </View>
       </View>

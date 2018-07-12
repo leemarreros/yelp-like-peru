@@ -15,8 +15,7 @@ import { generateLinkGoogle } from "./utils.js";
 
 class DisplayItemList extends Component {
   state = {
-    imageUrl:
-      "https://lh3.googleusercontent.com/p/AF1QipNVtrsACExpL_opYUpr1TMW8lGfU5Yz5gLcZbRQ=s1600-w150-h150"
+    source: require("../img/photo-placeholder-small.png")
   };
   getDistance = (p1, p2) => {
     const rad = x => {
@@ -41,7 +40,7 @@ class DisplayItemList extends Component {
       const link = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=150&maxheight=150&key=AIzaSyBRk4uEysUxoObBmGAzmz3eEbq_O48E7xg&photoreference=${photo_reference}`;
       fetch(link).then(data => {
         this.setState({
-          imageUrl: data.url
+          source: { uri: data.url }
         });
       });
     }
@@ -80,9 +79,7 @@ class DisplayItemList extends Component {
         <View style={styles.wrapperImage}>
           <Image
             style={styles.imageDisplayItemList}
-            source={{
-              uri: this.state.imageUrl
-            }}
+            source={this.state.source}
           />
         </View>
         <View style={styles.wrapperText}>
@@ -220,7 +217,10 @@ const styles = StyleSheet.create({
     marginLeft: 2
   },
   imageDisplayItemList: {
-    flex: 1
+    width: null,
+    height: null,
+    flex: 1,
+    backgroundColor: "white"
   },
   titleRest: {
     fontSize: 17,

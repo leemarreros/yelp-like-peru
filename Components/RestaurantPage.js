@@ -19,8 +19,6 @@ var { height, width } = Dimensions.get("window");
 
 class PhotosCarousel extends Component {
   state = {
-    imageUrl:
-      "https://lh3.googleusercontent.com/p/AF1QipNVtrsACExpL_opYUpr1TMW8lGfU5Yz5gLcZbRQ=s1600-w150-h150",
     data: []
   };
 
@@ -36,6 +34,7 @@ class PhotosCarousel extends Component {
 
   componentDidUpdate(prevProps) {
     const { photos } = this.props;
+
     if (JSON.stringify(photos) !== JSON.stringify(prevProps.photos)) {
       if (photos.length > 0) {
         photos.forEach((item, i) => {
@@ -47,7 +46,7 @@ class PhotosCarousel extends Component {
     }
   }
   render() {
-    const { data } = this.state;
+    const { data, source, loaded } = this.state;
     return (
       <FlatList
         style={styles.listImagesFlat}
@@ -203,6 +202,7 @@ class RestaurantPage extends Component {
     );
     let today = new Date().getDay();
     const dayOfDate = today > 0 ? today - 1 : 6;
+
     return (
       <ScrollView style={styles.restaurantPage}>
         <PhotosCarousel style={styles.listImages} photos={photos} />
@@ -274,7 +274,7 @@ class RestaurantPage extends Component {
           <Image
             resizeMode="contain"
             style={styles.imageHorario}
-            source={require("../img/place.png")}
+            source={require("../img/place-white-i.png")}
           />
           <Text style={styles.textFullMapB}>VER EN MAPA</Text>
         </TouchableOpacity>
@@ -285,7 +285,7 @@ class RestaurantPage extends Component {
           <Image
             resizeMode="contain"
             style={styles.imageHorario}
-            source={require("../img/place.png")}
+            source={require("../img/phone-icon.png")}
           />
           <Text style={styles.textFullMapB}>LLAMAR</Text>
         </TouchableOpacity>
