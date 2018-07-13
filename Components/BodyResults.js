@@ -12,7 +12,7 @@ import {
 class DisplayItemList extends Component {
   render() {
     const { item, onClickItemList } = this.props;
-
+    console.log("item", item);
     return (
       <View style={styles.itemDisplayWrapper}>
         <TouchableOpacity onPress={() => onClickItemList(item)}>

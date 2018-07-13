@@ -6,6 +6,8 @@
 
 import React, { Component } from "react";
 import { Platform, StyleSheet, Text, View, Modal } from "react-native";
+import SplashScreen from "react-native-splash-screen";
+
 import Header from "./Header";
 import BodyResults from "./BodyResults";
 import RestaurantList from "./RestaurantList";
