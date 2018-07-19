@@ -11,7 +11,7 @@ import Home from "./Components/Home";
 import RestaurantList from "./Components/RestaurantList";
 import RestaurantPage from "./Components/RestaurantPage";
 import FullMapPage from "./Components/FullMapPage";
-// console.disableYellowBox = true;
+console.disableYellowBox = true;
 import { YellowBox } from "react-native";
 YellowBox.ignoreWarnings([
   "Warning: isMounted(...) is deprecated",
