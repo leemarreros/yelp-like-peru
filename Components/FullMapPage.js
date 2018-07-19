@@ -61,7 +61,6 @@ export default class FullMapPage extends Component {
       Platform.OS === "ios"
         ? `${scheme}${name}@${latLng}`
         : `${scheme}${latLng}(${name})`;
-    console.log(url);
 
     Linking.canOpenURL(url).then(supported => {
       if (supported) {
