@@ -626,6 +626,7 @@
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
 						DevelopmentTeam = G89HVVK364;
+						ProvisioningStyle = Manual;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
@@ -1082,6 +1083,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_STYLE[sdk=iphoneos*]" = Manual;
 				DEVELOPMENT_TEAM = G89HVVK364;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1095,6 +1098,7 @@
 					"-lc++",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/YelpPeru.app/YelpPeru";
 			};
 			name = Debug;
@@ -1103,6 +1107,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_STYLE[sdk=iphoneos*]" = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEVELOPMENT_TEAM = G89HVVK364;
 				INFOPLIST_FILE = YelpPeruTests/Info.plist;
@@ -1113,6 +1119,7 @@
 					"-lc++",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/YelpPeru.app/YelpPeru";
 			};
 			name = Release;
@@ -1123,10 +1130,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Steve Marreros (8SP96E4JG4)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Steve Marreros (8SP96E4JG4)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = G89HVVK364;
 				INFOPLIST_FILE = YelpPeru/Info.plist;
@@ -1136,9 +1143,10 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.peru.dondecomer;
 				PRODUCT_NAME = YelpPeru;
-				PROVISIONING_PROFILE = "a9dc6ef1-c569-4b00-b8f9-9794538e5185";
-				PROVISIONING_PROFILE_SPECIFIER = "Donde Comer *";
+				PROVISIONING_PROFILE = "b2b427c3-3399-43f1-a567-7cc3dc5cefef";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development io.peru.dondecomer";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1149,10 +1157,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Steve Marreros (G89HVVK364)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Steve Marreros (G89HVVK364)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = G89HVVK364;
 				INFOPLIST_FILE = YelpPeru/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1161,9 +1169,10 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.peru.dondecomer;
 				PRODUCT_NAME = YelpPeru;
-				PROVISIONING_PROFILE = "c0495fd1-6139-4dd0-ab18-50e3f343801c";
-				PROVISIONING_PROFILE_SPECIFIER = "Steve Marreros";
+				PROVISIONING_PROFILE = "53e55f58-de0c-418b-a111-422aaf57dfd3";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore io.peru.dondecomer";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
