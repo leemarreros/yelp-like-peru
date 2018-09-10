@@ -60,3 +60,7 @@ keys.js
 
 # ignoring ios/Pods
 ios/Pods/
+
+#ignoring keys for releasing android
+my-release-key.keystore
+*/my-release-key.keystore
