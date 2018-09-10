@@ -98,11 +98,11 @@ android {
     buildToolsVersion '27.0.3'
 
     defaultConfig {
-        applicationId "com.yelpperu"
+        applicationId "io.peru.dondecomer"
         minSdkVersion 16
         targetSdkVersion 22
         versionCode 1
-        versionName "1.0"
+        versionName "0.1.0"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }

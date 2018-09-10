@@ -1,4 +1,4 @@
-package com.yelpperu;
+package io.peru.dondecomer;
 
 import android.app.Application;
 
