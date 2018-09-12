@@ -18,7 +18,7 @@ default_platform(:ios)
 platform :ios do
   desc "Push a new beta build to TestFlight"
   lane :beta do
-    # match(type: "appstore")
+    match(type: "appstore")
     # increment_build_number(xcodeproj: "YelpPeru.xcodeproj")
     # build_app(workspace: "YelpPeru.xcworkspace", scheme: "YelpPeru")
     upload_to_testflight(
@@ -32,4 +32,43 @@ platform :ios do
       force: true
     )
   end
+
+  desc "Makes an ipa for qa"
+  lane :buildipa do
+    match(type: "appstore")
+    cocoapods
+    gym(
+      workspace: "YelpPeru.xcworkspace",
+      configuration: "Debug", 
+      scheme: "YelpPeru", 
+      clean: true, 
+      include_bitcode: false,
+      output_directory: "../",
+      output_name: "YelpPeru.ipa",
+    )
+  end
+
+  desc "Makes an ipa adhoc for qa"
+  lane :buildipaadhoc do
+    match(type: "adhoc")
+    cocoapods
+    gym(
+      export_method: "ad-hoc",
+      workspace: "YelpPeru.xcworkspace",
+      configuration: "Debug", 
+      scheme: "YelpPeru", 
+      clean: true, 
+      include_bitcode: false,
+      output_directory: "../",
+      output_name: "YelpPeruAdHoc.ipa",
+    )
+  end
+
+  lane :installdevice do
+    install_on_device(
+      device_id: "25e736f5a3a3382afd41616ddc094978fa59233f",
+      ipa: "../YelpPeru.ipa"
+    )
+  end
+
 end
