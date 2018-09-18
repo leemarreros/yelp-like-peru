@@ -41,7 +41,10 @@ target 'YelpPeru' do
   pod 'Google-Maps-iOS-Utils' # Remove this line if you don't want to support GoogleMaps on iOS
 
   pod 'react-native-splash-screen', :path => '../node_modules/react-native-splash-screen'
-
+  
+  pod 'Firebase/Core'
+  pod 'Firebase'
+  pod 'Firebase/Messaging'
 end
 
 post_install do |installer|

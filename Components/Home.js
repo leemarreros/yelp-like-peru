@@ -5,8 +5,16 @@
  */
 
 import React, { Component } from "react";
-import { Platform, StyleSheet, Text, View, Modal } from "react-native";
+import {
+  Platform,
+  StyleSheet,
+  Text,
+  View,
+  Modal,
+  TouchableHighlight
+} from "react-native";
 import SplashScreen from "react-native-splash-screen";
+import FCM, { FCMEvent } from "react-native-fcm";
 
 import Header from "./Header";
 import BodyResults from "./BodyResults";
@@ -293,6 +301,45 @@ export default class Home extends Component<Props> {
     }
   };
 
+  componentDidMount() {
+    FCM.requestPermissions();
+
+    FCM.getFCMToken().then(token => {
+      console.log("TOKEN (getFCMToken)", token);
+    });
+
+    FCM.getInitialNotification().then(notif => {
+      console.log("INITIAL NOTIFICATION", notif);
+    });
+
+    this.notificationListner = FCM.on(FCMEvent.Notification, async notif => {
+      console.log("Notification", notif);
+      this.showLocalNotification(notif);
+    });
+  }
+
+  showLocalNotification = notif => {
+    console.log("showing local notification", notif);
+
+    FCM.presentLocalNotification({
+      body: notif.fcm.body,
+      priority: "high",
+      title: notif.fcm.title,
+      sound: "default",
+      icon: "img_phoneicon",
+      show_in_foreground: true /* notification when app is in foreground (local & remote)*/,
+      vibrate: 300 /* Android only default: 300, no vibration if you pass null*/,
+      lights: true, // Android only, LED blinking (default false)
+      status: notif.status
+    });
+
+    // FCM.presentLocalNotification({
+    //   title: "a",
+    //   body: "b",
+    //   show_in_foreground: true
+    // });
+  };
+
   componentWillMount() {
     navigator.geolocation.getCurrentPosition(
       position => {
@@ -306,6 +353,19 @@ export default class Home extends Component<Props> {
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
     );
   }
+
+  localNotification = () => {
+    console.log("pressed");
+
+    FCM.presentLocalNotification({
+      title: "notif.title",
+      body: "notif.body",
+      priority: "high",
+      click_action: "notif.click_action",
+      show_in_foreground: true,
+      local: true
+    });
+  };
 
   render() {
     const {
@@ -339,6 +399,9 @@ export default class Home extends Component<Props> {
           onFocusInputBarPlace={onFocusInputBarPlace}
           onClickItemList={this.onClickItemList}
         />
+        <TouchableHighlight onPress={() => this.localNotification()}>
+          <Text>Local Notification</Text>
+        </TouchableHighlight>
       </View>
     );
   }

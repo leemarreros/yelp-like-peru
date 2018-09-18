@@ -64,3 +64,11 @@ ios/Pods/
 #ignoring keys for releasing android
 my-release-key.keystore
 */my-release-key.keystore
+
+# ipas
+*.app.dSYM.zip
+
+# cetificates
+*.p12
+*.pem
+*.pkey
