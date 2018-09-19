@@ -7,6 +7,7 @@
 import React, { Component } from "react";
 import { Platform, StyleSheet, Text, View, Modal } from "react-native";
 import SplashScreen from "react-native-splash-screen";
+import firebase from "react-native-firebase";
 
 import Header from "./Header";
 import BodyResults from "./BodyResults";
@@ -305,6 +306,53 @@ export default class Home extends Component<Props> {
       error => console.warn("error geolocation", error),
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
     );
+  }
+
+  componentDidMount() {
+    firebase
+      .messaging()
+      .hasPermission()
+      .then(enabled => {
+        if (enabled) {
+          firebase
+            .messaging()
+            .getToken()
+            .then(token => {
+              console.log("LOG: ", token);
+            });
+          // user has permissions
+        } else {
+          firebase
+            .messaging()
+            .requestPermission()
+            .then(() => {
+              alert("User Now Has Permission");
+            })
+            .catch(error => {
+              alert("Error", error);
+              // User has rejected permissions
+            });
+        }
+      });
+
+    this.notificationListener = firebase
+      .notifications()
+      .onNotification(notification => {
+        // Process your notification as required
+        const {
+          body,
+          data,
+          notificationId,
+          sound,
+          subtitle,
+          title
+        } = notification;
+        console.log("LOG: ", title, body, JSON.stringify(data));
+      });
+  }
+
+  componentWillUnmount() {
+    this.notificationListener();
   }
 
   render() {

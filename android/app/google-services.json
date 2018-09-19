@@ -1,0 +1,62 @@
+{
+  "project_info": {
+    "project_number": "716687293243",
+    "firebase_url": "https://donde-comer-f9358.firebaseio.com",
+    "project_id": "donde-comer-f9358",
+    "storage_bucket": "donde-comer-f9358.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:716687293243:android:2e1e329e4c026558",
+        "android_client_info": {
+          "package_name": "io.peru.dondecomer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "716687293243-9fnkv02a58inft33nm5ktso10kd84art.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "io.peru.dondecomer",
+            "certificate_hash": "8b878487d22c3c80ebbca71a6f2f01cbcb71ac3e"
+          }
+        },
+        {
+          "client_id": "716687293243-d3mlck3111fcekl866h2g0b94f7f3lgh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCE5dz40RXsMfBjy2k21x6htmIdSBrtZ5o"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "716687293243-d3mlck3111fcekl866h2g0b94f7f3lgh.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "716687293243-n360i88jfc49foai4jf52oeb5disitim.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "io.peru.dondecomer"
+              }
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
