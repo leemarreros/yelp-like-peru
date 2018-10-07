@@ -10,7 +10,8 @@ import { createStackNavigator } from "react-navigation";
 import Home from "./Components/Home";
 import RestaurantList from "./Components/RestaurantList";
 import RestaurantPage from "./Components/RestaurantPage";
-// console.disableYellowBox = true;
+import FullMapPage from "./Components/FullMapPage";
+console.disableYellowBox = true;
 import { YellowBox } from "react-native";
 YellowBox.ignoreWarnings([
   "Warning: isMounted(...) is deprecated",
@@ -34,6 +35,9 @@ const RootStack = createStackNavigator(
     },
     RestaurantPage: {
       screen: RestaurantPage
+    },
+    FullMapPage: {
+      screen: FullMapPage
     }
   },
   {

@@ -6,13 +6,16 @@
 
 import React, { Component } from "react";
 import { Platform, StyleSheet, Text, View, Modal } from "react-native";
+import SplashScreen from "react-native-splash-screen";
+import firebase from "react-native-firebase";
+
 import Header from "./Header";
 import BodyResults from "./BodyResults";
 import RestaurantList from "./RestaurantList";
 import { createStackNavigator } from "react-navigation";
 import { credentialGoogle } from "../keys";
 import { NavigationActions } from "react-navigation";
-import { generateLinkGoogle } from './utils';
+import { generateLinkGoogle } from "./utils";
 
 type Props = {};
 export default class Home extends Component<Props> {
@@ -55,7 +58,9 @@ export default class Home extends Component<Props> {
         onFocusInputBarFood: true
       });
 
-      fetch(generateLinkGoogle(item.place_id, "placeDetails", {}, lat, long, radius))
+      fetch(
+        generateLinkGoogle(item.place_id, "placeDetails", {}, lat, long, radius)
+      )
         .then(data => data.json())
         .then(data => {
           const { lat, lng } = data.result.geometry.location;
@@ -81,7 +86,14 @@ export default class Home extends Component<Props> {
           fetch: {
             item,
             fetch: fetch(
-              generateLinkGoogle(item.place_id, "placeDetails", {}, lat, long, radius)
+              generateLinkGoogle(
+                item.place_id,
+                "placeDetails",
+                {},
+                lat,
+                long,
+                radius
+              )
             ),
             fetching: true
           }
@@ -94,7 +106,14 @@ export default class Home extends Component<Props> {
         this.props.navigation.navigate("RestaurantList", {
           fetch: {
             fetch: fetch(
-              generateLinkGoogle(textQueryFood, "searchListFood", {}, lat, long, radius)
+              generateLinkGoogle(
+                textQueryFood,
+                "searchListFood",
+                {},
+                lat,
+                long,
+                radius
+              )
             ),
             fetching: true,
             lat,
@@ -107,7 +126,7 @@ export default class Home extends Component<Props> {
   };
 
   fetchFoodListData = textQueryFood => {
-    const  { lat, long, radius } = this.state;
+    const { lat, long, radius } = this.state;
     fetch(generateLinkGoogle(textQueryFood, "food", {}, lat, long, radius))
       .then(data => data.json())
       .then(data => {
@@ -178,42 +197,12 @@ export default class Home extends Component<Props> {
 
   cancelSearch = () => {
     this.setState({
-      onFocusInputBarFood: false,
+      onFocusInputBarFood: true,
       onFocusInputBarPlace: false,
       textQueryFood: "",
       textQueryPlace: "Ubicación Actual",
       currentListRender: []
     });
-  };
-
-  //  {  lat, lon } are keys that come from google api
-  generateLinkGoogle = (query, type, coords = {}, lat, long, radius) => {
-    const queryFixed = query.trim().replace(/  +/g, "+");
-    if (type === "food") {
-      // filter those resultst that don't have the place_id key within
-      return `https://maps.googleapis.com/maps/api/place/queryautocomplete/json?key=${credentialGoogle}&location=${lat},${long}&radius=${radius}&language=es&input=${queryFixed}`;
-    }
-    if (type === "placeAuto") {
-      let link = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${queryFixed}&location=${lat},${long}&radius=2000&language=es&key=${credentialGoogle}`;
-      return link;
-    }
-    if (type === "placeDetails")
-      return `https://maps.googleapis.com/maps/api/place/details/json?placeid=${query}&language=es&key=${credentialGoogle}`;
-
-    if (type === "searchListFood")
-      return `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${long}&types=restaurant&keyword=${queryFixed}&language=es&radius=3000&key=${credentialGoogle}`;
-    // used to retrieve photos based on PHOTO_REFERENCE
-    // "https://maps.googleapis.com/maps/api/place/photo?photoreference=PHOTO_REFERENCE&sensor=false&maxheight=MAX_HEIGHT&maxwidth=MAX_WIDTH&key=YOUR_API_KEY";
-
-    if (type === "searchListFoodNoGeolocation")
-      return `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${
-        coords.lat
-      },${
-        coords.lng
-      }&types=restaurant&keyword=${queryFixed}&language=es&radius=3000&key=${credentialGoogle}`;
-
-    // use to retrieve next page results
-    // https://maps.googleapis.com/maps/api/place/nearbysearch/json?pagetoken=${PAGE_TOKEN}
   };
 
   makeSearchButton = () => {
@@ -239,7 +228,14 @@ export default class Home extends Component<Props> {
       this.props.navigation.navigate("RestaurantList", {
         fetch: {
           fetch: fetch(
-            generateLinkGoogle(textQueryFood, "searchListFood", {}, lat, long, radius)
+            generateLinkGoogle(
+              textQueryFood,
+              "searchListFood",
+              {},
+              lat,
+              long,
+              radius
+            )
           ),
           fetching: true,
           lat,
@@ -263,13 +259,22 @@ export default class Home extends Component<Props> {
             textQueryFood,
             "searchListFoodNoGeolocation",
             coords,
-            lat, long, radius
+            lat,
+            long,
+            radius
           )
         );
       // fetching coords
       // returns a promise with the list that'll resolve
       const fetchingCoords = fetch(
-        generateLinkGoogle(firstItemListPlace.place_id, "placeDetails", {}, lat, long, radius)
+        generateLinkGoogle(
+          firstItemListPlace.place_id,
+          "placeDetails",
+          {},
+          lat,
+          long,
+          radius
+        )
       )
         .then(data => data.json())
         .then(data => {
@@ -301,6 +306,53 @@ export default class Home extends Component<Props> {
       error => console.warn("error geolocation", error),
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
     );
+  }
+
+  componentDidMount() {
+    firebase
+      .messaging()
+      .hasPermission()
+      .then(enabled => {
+        if (enabled) {
+          firebase
+            .messaging()
+            .getToken()
+            .then(token => {
+              console.log("LOG: ", token);
+            });
+          // user has permissions
+        } else {
+          firebase
+            .messaging()
+            .requestPermission()
+            .then(() => {
+              alert("User Now Has Permission");
+            })
+            .catch(error => {
+              alert("Error", error);
+              // User has rejected permissions
+            });
+        }
+      });
+
+    this.notificationListener = firebase
+      .notifications()
+      .onNotification(notification => {
+        // Process your notification as required
+        const {
+          body,
+          data,
+          notificationId,
+          sound,
+          subtitle,
+          title
+        } = notification;
+        console.log("LOG: ", title, body, JSON.stringify(data));
+      });
+  }
+
+  componentWillUnmount() {
+    this.notificationListener();
   }
 
   render() {
@@ -345,7 +397,5 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#d11a1c"
   },
-  bodyResultsContainer: {
-    backgroundColor: "yellow"
-  }
+  bodyResultsContainer: {}
 });

@@ -48,9 +48,9 @@ buck-out/
 # For more information about the recommended setup visit:
 # https://docs.fastlane.tools/best-practices/source-control/
 
-*/fastlane/report.xml
-*/fastlane/Preview.html
-*/fastlane/screenshots
+ios/fastlane/report.xml
+ios/fastlane/Preview.html
+ios/fastlane/screenshots
 
 # Bundle artifact
 *.jsbundle
@@ -61,6 +61,25 @@ keys.js
 # ignoring pods
 ios/Pods/
 
+#ignoring keys for releasing android
+my-release-key.keystore
+*/my-release-key.keystore
+
+# certificates
+*.p12
+*.pem
+*.pkey
+
+# ipas
+*.dSYM.zip
+*.app.dSYM.zip
+
 # ignoring keys
 **/*/strings.xml
 strings.xml
+
+
+# bundle
+index.android.bundle
+index.android.bundle.meta
+*.jsbundle.meta

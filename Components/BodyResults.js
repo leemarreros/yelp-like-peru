@@ -12,11 +12,11 @@ import {
 class DisplayItemList extends Component {
   render() {
     const { item, onClickItemList } = this.props;
-
+    console.log("item", item);
     return (
       <View style={styles.itemDisplayWrapper}>
         <TouchableOpacity onPress={() => onClickItemList(item)}>
-          <Text>{item.description}</Text>
+          <Text numberOfLines={1}>{item.description}</Text>
         </TouchableOpacity>
       </View>
     );
@@ -48,14 +48,19 @@ export default BodyResults;
 const styles = StyleSheet.create({
   bodyResultsContainer: {
     flex: 6,
-    backgroundColor: "white"
+    backgroundColor: "#BC070A"
   },
   itemDisplayWrapper: {
     flex: 1,
     minHeight: 40,
-    borderWidth: 1,
-    borderBottomColor: "grey",
     justifyContent: "center",
-    paddingHorizontal: 10
+    paddingHorizontal: 10,
+    marginHorizontal: 4,
+    borderRadius: 6,
+    marginTop: 1,
+    backgroundColor: "white"
+  },
+  description: {
+    fontFamily: "Helvetica"
   }
 });

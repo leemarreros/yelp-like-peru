@@ -1,6 +1,6 @@
 {
   "name": "YelpPeru",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
@@ -9,6 +9,9 @@
   "dependencies": {
     "react": "16.3.1",
     "react-native": "0.55.4",
+    "react-native-firebase": "^4.3.8",
+    "react-native-maps": "^0.21.0",
+    "react-native-splash-screen": "3.0.6",
     "react-navigation": "^2.5.5"
   },
   "devDependencies": {

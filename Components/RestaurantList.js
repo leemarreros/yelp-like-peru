@@ -9,16 +9,17 @@ import {
 } from "react-native";
 
 import Rating from "./Rating";
-import { generateLinkGoogle} from './utils.js';
+import LogoTitle from "./LogoTitle";
+
+import { generateLinkGoogle } from "./utils.js";
 
 class DisplayItemList extends Component {
   state = {
-    imageUrl:
-      "https://lh3.googleusercontent.com/p/AF1QipNVtrsACExpL_opYUpr1TMW8lGfU5Yz5gLcZbRQ=s1600-w150-h150"
+    source: require("../img/photo-placeholder-small.png")
   };
   getDistance = (p1, p2) => {
     const rad = x => {
-      return x * Math.PI / 180;
+      return (x * Math.PI) / 180;
     };
     var R = 6378137; // Earth’s mean radius in meter
     var dLat = rad(p2.lat - p1.lat);
@@ -39,7 +40,7 @@ class DisplayItemList extends Component {
       const link = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=150&maxheight=150&key=AIzaSyBRk4uEysUxoObBmGAzmz3eEbq_O48E7xg&photoreference=${photo_reference}`;
       fetch(link).then(data => {
         this.setState({
-          imageUrl: data.url
+          source: { uri: data.url }
         });
       });
     }
@@ -50,12 +51,12 @@ class DisplayItemList extends Component {
       fetch: {
         item,
         fetch: fetch(
-          generateLinkGoogle(item.place_id, "placeDetails", {}, lat, long )
+          generateLinkGoogle(item.place_id, "placeDetails", {}, lat, long)
         ),
         fetching: true
       }
     });
-  }
+  };
   render() {
     // current location
     const { item, lat, long, radius } = this.props;
@@ -73,14 +74,12 @@ class DisplayItemList extends Component {
 
     return (
       <TouchableOpacity
-      onPress={this.onClickRestListItem}
-      style={styles.itemDisplayWrapper}>
+        onPress={this.onClickRestListItem}
+        style={styles.itemDisplayWrapper}>
         <View style={styles.wrapperImage}>
           <Image
             style={styles.imageDisplayItemList}
-            source={{
-              uri: this.state.imageUrl
-            }}
+            source={this.state.source}
           />
         </View>
         <View style={styles.wrapperText}>
@@ -88,7 +87,12 @@ class DisplayItemList extends Component {
             {item.name}
           </Text>
           {openNowExists ? (
-            <Text>
+            <Text
+              style={[
+                item.opening_hours.open_now
+                  ? styles.openNowText
+                  : styles.closeNowText
+              ]}>
               Está {item.opening_hours.open_now ? "abierto" : "cerrado"}
             </Text>
           ) : (
@@ -104,6 +108,14 @@ class DisplayItemList extends Component {
 }
 
 export default class RestaurantList extends Component {
+  static navigationOptions = {
+    // headerTitle instead of title
+    headerTitle: <LogoTitle />,
+    headerStyle: {
+      backgroundColor: "#BC070A"
+    }
+  };
+
   state = {
     partialRestaurantList: [],
     completeList: [],
@@ -123,19 +135,21 @@ export default class RestaurantList extends Component {
   };
 
   componentWillMount() {
-    const { fetch, fetching, lat, long, generateLinkGoogle} = this.props.navigation.getParam(
-      "fetch",
-      {}
-    );
+    const {
+      fetch,
+      fetching,
+      lat,
+      long,
+      generateLinkGoogle
+    } = this.props.navigation.getParam("fetch", {});
     if (fetching) {
       fetch.then(data => data.json()).then(data => {
-
         this.setState(
           {
             completeList: [...data.results],
             nextPageToken: data.next_page_token || "",
             lat,
-            long,
+            long
           },
           this.handleLoadMore
         );
@@ -187,23 +201,32 @@ const styles = StyleSheet.create({
     minHeight: 100,
     flex: 1,
     flexDirection: "row",
-    borderWidth: 0.5,
-    borderBottomColor: "grey"
+    borderBottomWidth: 1,
+    borderBottomColor: "#BC070A",
+    marginHorizontal: 10,
+    marginBottom: 6,
+    paddingBottom: 6
   },
   wrapperImage: {
     flex: 1,
-    padding: 8,
+    padding: 4,
     borderRadius: 5
   },
   wrapperText: {
-    flex: 3
+    flex: 3,
+    marginLeft: 2
   },
   imageDisplayItemList: {
-    flex: 1
+    width: null,
+    height: null,
+    flex: 1,
+    backgroundColor: "white"
   },
   titleRest: {
     fontSize: 17,
-    fontWeight: "bold"
+    fontWeight: "bold",
+    fontFamily: "Helvetica",
+    color: "#BC070A"
   },
   wrapperStars: {
     flexDirection: "row"
@@ -211,5 +234,11 @@ const styles = StyleSheet.create({
   ratingStart: {
     height: 15,
     width: 15
+  },
+  openNowText: {
+    color: "#51a953"
+  },
+  closeNow: {
+    color: "#51a953"
   }
 });

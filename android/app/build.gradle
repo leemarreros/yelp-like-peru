@@ -98,13 +98,23 @@ android {
     buildToolsVersion "23.0.1"
 
     defaultConfig {
-        applicationId "com.yelpperu"
+        applicationId "io.peru.dondecomer"
         minSdkVersion 16
-        targetSdkVersion 22
+        targetSdkVersion 26
         versionCode 1
-        versionName "1.0"
+        versionName "0.1.0"
         ndk {
             abiFilters "armeabi-v7a", "x86"
+        }
+    }
+    signingConfigs {
+        release {
+            if (project.hasProperty('MYAPP_RELEASE_STORE_FILE')) {
+                storeFile file(MYAPP_RELEASE_STORE_FILE)
+                storePassword MYAPP_RELEASE_STORE_PASSWORD
+                keyAlias MYAPP_RELEASE_KEY_ALIAS
+                keyPassword MYAPP_RELEASE_KEY_PASSWORD
+            }
         }
     }
     splits {
@@ -119,6 +129,7 @@ android {
         release {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            signingConfig signingConfigs.release
         }
     }
     // applicationVariants are e.g. debug, release
@@ -134,9 +145,37 @@ android {
             }
         }
     }
+    subprojects {
+        project.configurations.all {
+            afterEvaluate {project ->
+                if (project.hasProperty("android")) {
+                    android {
+                        compileSdkVersion 23
+                        buildToolsVersion '27.0.3'
+                    }
+                }
+            }
+            resolutionStrategy.eachDependency { details ->
+                if (details.requested.group == 'com.android.support'
+                        && !details.requested.name.contains('multidex') ) {
+                    details.useVersion "26.0.2"
+                }
+            }
+        }
+    }
 }
 
 dependencies {
+    implementation "com.facebook.react:react-native:+"  // From node_modules
+    implementation(project(':react-native-maps')){
+        exclude group: 'com.google.android.gms', module: 'play-services-base'
+        exclude group: 'com.google.android.gms', module: 'play-services-maps'
+    }
+    implementation 'com.google.android.gms:play-services-maps:15.0.1'
+
+    implementation project(':react-native-firebase')
+    implementation "com.google.firebase:firebase-core:16.0.1"
+    implementation 'com.google.firebase:firebase-messaging:17.1.0'
     compile fileTree(dir: "libs", include: ["*.jar"])
     compile "com.android.support:appcompat-v7:23.0.1"
     compile "com.facebook.react:react-native:+"  // From node_modules
@@ -148,3 +187,6 @@ task copyDownloadableDepsToLibs(type: Copy) {
     from configurations.compile
     into 'libs'
 }
+apply plugin: 'com.google.gms.google-services'
+com.google.gms.googleservices.GoogleServicesPlugin.config.disableVersionCheck = true
+
