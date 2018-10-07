@@ -72,3 +72,4 @@ my-release-key.keystore
 
 # ipas
 *.dSYM.zip
+*.app.dSYM.zip

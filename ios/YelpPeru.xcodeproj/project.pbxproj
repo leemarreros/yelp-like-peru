@@ -1204,7 +1204,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Steve Marreros (8SP96E4JG4)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Steve Marreros (8SP96E4JG4)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = G89HVVK364;
 				HEADER_SEARCH_PATHS = (
@@ -1236,7 +1236,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Steve Marreros (G89HVVK364)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Steve Marreros (G89HVVK364)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = G89HVVK364;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
