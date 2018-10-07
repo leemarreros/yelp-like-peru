@@ -1,5 +1,3 @@
-import { credentialGoogle } from "../keys";
-import Rating from "./Rating";
 import React, { Component } from "react";
 import {
   Dimensions,
