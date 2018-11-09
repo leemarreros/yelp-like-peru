@@ -36,10 +36,12 @@ class IconBrandAndButtons extends Component {
     );
     const buttons = (
       <View style={styles.iconAndButtonWrapper}>
-        <TouchableOpacity onPress={cancelSearch} style={styles.buttonTop}>
+        <TouchableOpacity
+        onPress={cancelSearch} style={styles.buttonTop}>
           <Text style={styles.textButton}>Cancelar</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={makeSearchButton} style={styles.buttonTop}>
+        <TouchableOpacity
+        onPress={makeSearchButton} style={styles.buttonTop}>
           <Text style={styles.textButton}>Buscar</Text>
         </TouchableOpacity>
       </View>
@@ -153,7 +155,7 @@ class Header extends Component {
           makeSearchButton={makeSearchButton}
         />
         <SearchBarFood
-          handleChangeQueryFood={handleChangeQueryFood}
+        handleChangeQueryFood={handleChangeQueryFood}
           handleChangeQueryPlace={handleChangeQueryPlace}
           textQueryFood={textQueryFood}
           handleOnFocusInputBarFood={handleOnFocusInputBarFood}

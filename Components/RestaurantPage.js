@@ -1,4 +1,4 @@
-import { credentialGoogle } from "../keys";
+import {_API_KEY_GOOGLE_} from 'react-native-dotenv';
 import Rating from "./Rating";
 import React, { Component } from "react";
 import {
@@ -29,7 +29,7 @@ class PhotosCarousel extends Component {
   };
 
   createGoogleLink = photo_reference => {
-    return `https://maps.googleapis.com/maps/api/place/photo?photoreference=${photo_reference}&sensor=false&maxheight=500&maxwidth=500&key=${credentialGoogle}`;
+    return `https://maps.googleapis.com/maps/api/place/photo?photoreference=${photo_reference}&sensor=false&maxheight=500&maxwidth=500&key=${_API_KEY_GOOGLE_}`;
   };
 
   componentDidUpdate(prevProps) {
@@ -114,7 +114,6 @@ class RestaurantPage extends Component {
           international_phone_number = "",
           opening_hours = {}
         } = data.result;
-        console.log("data.result", data.result);
         this.setState({
           formatted_address,
           geometry,
@@ -140,8 +139,6 @@ class RestaurantPage extends Component {
   }
 
   showFullMapPage = () => {
-    console.log("showFullMapPage", this.state.marker, this.state.region);
-
     this.props.navigation.navigate("FullMapPage", {
       map: {
         region: this.state.region,

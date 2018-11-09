@@ -13,6 +13,8 @@ import LogoTitle from "./LogoTitle";
 
 import { generateLinkGoogle } from "./utils.js";
 
+import {_API_KEY_GOOGLE_} from 'react-native-dotenv';
+
 class DisplayItemList extends Component {
   state = {
     source: require("../img/photo-placeholder-small.png")
@@ -37,7 +39,7 @@ class DisplayItemList extends Component {
   componentWillMount() {
     const { photo_reference } = this.props;
     if (photo_reference !== " ") {
-      const link = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=150&maxheight=150&key=AIzaSyBRk4uEysUxoObBmGAzmz3eEbq_O48E7xg&photoreference=${photo_reference}`;
+      const link = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=150&maxheight=150&key=${_API_KEY_GOOGLE_}&photoreference=${photo_reference}`;
       fetch(link).then(data => {
         this.setState({
           source: { uri: data.url }

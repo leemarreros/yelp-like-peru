@@ -28,16 +28,16 @@ const instructions = Platform.select({
 const RootStack = createStackNavigator(
   {
     Home: {
-      screen: Home
+      screen: Home,
     },
     RestaurantList: {
-      screen: RestaurantList
+      screen: RestaurantList,
     },
     RestaurantPage: {
-      screen: RestaurantPage
+      screen: RestaurantPage,
     },
     FullMapPage: {
-      screen: FullMapPage
+      screen: FullMapPage,
     }
   },
   {

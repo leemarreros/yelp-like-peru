@@ -51,6 +51,10 @@ buck-out/
 ios/fastlane/report.xml
 ios/fastlane/Preview.html
 ios/fastlane/screenshots
+ios/screenshots/
+ios/fastlane
+ios/FastlaneSnapshot/*
+ios/YelpPeru.xcodeproj/xcshareddata/xcschemes/FastlaneSnapshot.xcscheme
 
 # Bundle artifact
 *.jsbundle
@@ -73,3 +77,10 @@ my-release-key.keystore
 # ipas
 *.dSYM.zip
 *.app.dSYM.zip
+
+# xcode google maps credentials
+Secrets.h
+secrets.xml
+
+# enviroment variables
+.env

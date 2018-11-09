@@ -13,7 +13,6 @@ import Header from "./Header";
 import BodyResults from "./BodyResults";
 import RestaurantList from "./RestaurantList";
 import { createStackNavigator } from "react-navigation";
-import { credentialGoogle } from "../keys";
 import { NavigationActions } from "react-navigation";
 import { generateLinkGoogle } from "./utils";
 
@@ -127,14 +126,18 @@ export default class Home extends Component<Props> {
 
   fetchFoodListData = textQueryFood => {
     const { lat, long, radius } = this.state;
-    fetch(generateLinkGoogle(textQueryFood, "food", {}, lat, long, radius))
+    let link = generateLinkGoogle(textQueryFood, "food", {}, lat, long, radius);
+    console.log('link food', link);
+    fetch(link)
       .then(data => data.json())
       .then(data => {
+        console.log('data', data);
         const currentListRender = data.predictions;
         this.setState({
           currentListRender: [...currentListRender]
         });
-      });
+      })
+      .catch(e => console.log(e, 'error in fetchFoodListData'));
   };
 
   handleChangeQueryFood = textQueryFood => {
@@ -146,7 +149,9 @@ export default class Home extends Component<Props> {
 
   fetchPlacesListData = (textQueryFood, type) => {
     const { lat, long, radius } = this.state;
-    fetch(generateLinkGoogle(textQueryFood, type, {}, lat, long, radius))
+    let link = generateLinkGoogle(textQueryFood, type, {}, lat, long, radius);
+    console.log('link places', link);
+    fetch(link)
       .then(data => data.json())
       .then(data => {
         const currentListRender = data.predictions;
