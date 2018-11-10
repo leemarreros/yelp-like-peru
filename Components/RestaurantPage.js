@@ -16,7 +16,6 @@ import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import LogoTitle from "./LogoTitle";
 
 import Rating from "./Rating";
-import { credentialGoogle } from "../keys";
 
 var { height, width } = Dimensions.get("window");
 
