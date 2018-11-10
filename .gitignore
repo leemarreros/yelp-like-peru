@@ -63,8 +63,9 @@ ios/YelpPeru.xcodeproj/xcshareddata/xcschemes/FastlaneSnapshot.xcscheme
 # ignoring file with keys
 keys.js
 
-# ignoring ios/Pods
-ios/Pods/
+# ignoring pods
+ios/Pods/*
+ios/Pods
 
 #ignoring keys for releasing android
 my-release-key.keystore

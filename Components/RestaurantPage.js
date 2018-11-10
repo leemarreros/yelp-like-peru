@@ -1,5 +1,4 @@
 import {_API_KEY_GOOGLE_} from 'react-native-dotenv';
-import Rating from "./Rating";
 import React, { Component } from "react";
 import {
   Dimensions,
@@ -15,6 +14,9 @@ import {
 } from "react-native";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import LogoTitle from "./LogoTitle";
+
+import Rating from "./Rating";
+
 var { height, width } = Dimensions.get("window");
 
 class PhotosCarousel extends Component {

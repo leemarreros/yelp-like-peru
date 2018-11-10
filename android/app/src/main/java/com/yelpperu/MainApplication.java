@@ -13,7 +13,6 @@ import com.facebook.soloader.SoLoader;
 import com.airbnb.android.react.maps.MapsPackage;
 import io.invertase.firebase.messaging.RNFirebaseMessagingPackage; // <-- Add this line
 
-
 import java.util.Arrays;
 import java.util.List;
 
