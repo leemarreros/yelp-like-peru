@@ -1,0 +1,1 @@
+Primera versión de esta applicación. Incluye geolocalización para sugerir restaurantes alrededor de la ubicación del usuario.
