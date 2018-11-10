@@ -127,11 +127,9 @@ export default class Home extends Component<Props> {
   fetchFoodListData = textQueryFood => {
     const { lat, long, radius } = this.state;
     let link = generateLinkGoogle(textQueryFood, "food", {}, lat, long, radius);
-    console.log('link food', link);
     fetch(link)
       .then(data => data.json())
       .then(data => {
-        console.log('data', data);
         const currentListRender = data.predictions;
         this.setState({
           currentListRender: [...currentListRender]
@@ -150,7 +148,6 @@ export default class Home extends Component<Props> {
   fetchPlacesListData = (textQueryFood, type) => {
     const { lat, long, radius } = this.state;
     let link = generateLinkGoogle(textQueryFood, type, {}, lat, long, radius);
-    console.log('link places', link);
     fetch(link)
       .then(data => data.json())
       .then(data => {
@@ -230,18 +227,18 @@ export default class Home extends Component<Props> {
       (onClickPlaceSelected && textQueryFood !== "" && textQueryPlace !== "") ||
       (textQueryPlace !== "" && textQueryFood !== "")
     ) {
+      let link =  generateLinkGoogle(
+        textQueryFood,
+        "searchListFood",
+        {},
+        lat,
+        long,
+        radius
+      );
+      
       this.props.navigation.navigate("RestaurantList", {
         fetch: {
-          fetch: fetch(
-            generateLinkGoogle(
-              textQueryFood,
-              "searchListFood",
-              {},
-              lat,
-              long,
-              radius
-            )
-          ),
+          fetch: fetch(link),
           fetching: true,
           lat,
           long
@@ -323,7 +320,7 @@ export default class Home extends Component<Props> {
             .messaging()
             .getToken()
             .then(token => {
-              console.log("LOG: ", token);
+              // console.log("LOG: ", token);
             });
           // user has permissions
         } else {
@@ -352,7 +349,6 @@ export default class Home extends Component<Props> {
           subtitle,
           title
         } = notification;
-        console.log("LOG: ", title, body, JSON.stringify(data));
       });
   }
 

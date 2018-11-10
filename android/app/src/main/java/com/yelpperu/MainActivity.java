@@ -1,4 +1,4 @@
-package io.peru.dondecomer;
+package com.yelpperu;
 
 import com.facebook.react.ReactActivity;
 

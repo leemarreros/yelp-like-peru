@@ -145,17 +145,21 @@ export default class RestaurantList extends Component {
       generateLinkGoogle
     } = this.props.navigation.getParam("fetch", {});
     if (fetching) {
-      fetch.then(data => data.json()).then(data => {
-        this.setState(
-          {
-            completeList: [...data.results],
-            nextPageToken: data.next_page_token || "",
-            lat,
-            long
-          },
-          this.handleLoadMore
-        );
-      });
+      fetch
+        .then(data => data.json())
+        .then(data => {
+          
+          this.setState(
+            {
+              completeList: [...data.results],
+              nextPageToken: data.next_page_token || "",
+              lat,
+              long
+            },
+            this.handleLoadMore
+          );
+        })
+        .catch(e => console.log('RestaurantList', e));
       return;
     }
     this.setState(
@@ -167,6 +171,11 @@ export default class RestaurantList extends Component {
   }
 
   render() {
+    const {
+      partialRestaurantList,
+      lat,
+      long,
+    } = this.state;
     return (
       <View style={styles.bodyResultsContainer}>
         <FlatList
@@ -179,15 +188,15 @@ export default class RestaurantList extends Component {
               <DisplayItemList
                 navigation={this.props.navigation}
                 item={item}
-                lat={this.state.lat}
-                long={this.state.long}
+                lat={lat}
+                long={long}
                 photo_reference={photo_reference}
               />
             );
           }}
           onEndReachedThreshold={0.25}
           onEndReached={this.handleLoadMore}
-          data={this.state.partialRestaurantList}
+          data={partialRestaurantList}
         />
       </View>
     );
