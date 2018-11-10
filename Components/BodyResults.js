@@ -12,10 +12,10 @@ import {
 class DisplayItemList extends Component {
   render() {
     const { item, onClickItemList } = this.props;
-    console.log("item", item);
     return (
       <View style={styles.itemDisplayWrapper}>
-        <TouchableOpacity onPress={() => onClickItemList(item)}>
+        <TouchableOpacity 
+        onPress={() => onClickItemList(item)}>
           <Text numberOfLines={1}>{item.description}</Text>
         </TouchableOpacity>
       </View>
@@ -33,7 +33,8 @@ class BodyResults extends Component {
           keyExtractor={(x, i) => i.toString()}
           renderItem={({ item }) => {
             return (
-              <DisplayItemList onClickItemList={onClickItemList} item={item} />
+              <DisplayItemList 
+               onClickItemList={onClickItemList} item={item} />
             );
           }}
           data={listResult}

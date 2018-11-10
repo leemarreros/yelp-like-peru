@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:716687293243:android:2e1e329e4c026558",
         "android_client_info": {
-          "package_name": "io.peru.dondecomer"
+          "package_name": "com.yelpperu"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "716687293243-9fnkv02a58inft33nm5ktso10kd84art.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "io.peru.dondecomer",
+            "package_name": "com.yelpperu",
             "certificate_hash": "8b878487d22c3c80ebbca71a6f2f01cbcb71ac3e"
           }
         },
@@ -47,7 +47,7 @@
               "client_id": "716687293243-n360i88jfc49foai4jf52oeb5disitim.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "io.peru.dondecomer"
+                "bundle_id": "com.yelpperu"
               }
             }
           ]

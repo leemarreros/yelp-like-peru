@@ -13,7 +13,6 @@ import Header from "./Header";
 import BodyResults from "./BodyResults";
 import RestaurantList from "./RestaurantList";
 import { createStackNavigator } from "react-navigation";
-import { credentialGoogle } from "../keys";
 import { NavigationActions } from "react-navigation";
 import { generateLinkGoogle } from "./utils";
 
@@ -127,14 +126,16 @@ export default class Home extends Component<Props> {
 
   fetchFoodListData = textQueryFood => {
     const { lat, long, radius } = this.state;
-    fetch(generateLinkGoogle(textQueryFood, "food", {}, lat, long, radius))
+    let link = generateLinkGoogle(textQueryFood, "food", {}, lat, long, radius);
+    fetch(link)
       .then(data => data.json())
       .then(data => {
         const currentListRender = data.predictions;
         this.setState({
           currentListRender: [...currentListRender]
         });
-      });
+      })
+      .catch(e => console.log(e, 'error in fetchFoodListData'));
   };
 
   handleChangeQueryFood = textQueryFood => {
@@ -146,7 +147,8 @@ export default class Home extends Component<Props> {
 
   fetchPlacesListData = (textQueryFood, type) => {
     const { lat, long, radius } = this.state;
-    fetch(generateLinkGoogle(textQueryFood, type, {}, lat, long, radius))
+    let link = generateLinkGoogle(textQueryFood, type, {}, lat, long, radius);
+    fetch(link)
       .then(data => data.json())
       .then(data => {
         const currentListRender = data.predictions;
@@ -225,18 +227,18 @@ export default class Home extends Component<Props> {
       (onClickPlaceSelected && textQueryFood !== "" && textQueryPlace !== "") ||
       (textQueryPlace !== "" && textQueryFood !== "")
     ) {
+      let link =  generateLinkGoogle(
+        textQueryFood,
+        "searchListFood",
+        {},
+        lat,
+        long,
+        radius
+      );
+      
       this.props.navigation.navigate("RestaurantList", {
         fetch: {
-          fetch: fetch(
-            generateLinkGoogle(
-              textQueryFood,
-              "searchListFood",
-              {},
-              lat,
-              long,
-              radius
-            )
-          ),
+          fetch: fetch(link),
           fetching: true,
           lat,
           long
@@ -318,7 +320,7 @@ export default class Home extends Component<Props> {
             .messaging()
             .getToken()
             .then(token => {
-              console.log("LOG: ", token);
+              // console.log("LOG: ", token);
             });
           // user has permissions
         } else {
@@ -347,7 +349,6 @@ export default class Home extends Component<Props> {
           subtitle,
           title
         } = notification;
-        console.log("LOG: ", title, body, JSON.stringify(data));
       });
   }
 

@@ -9,6 +9,7 @@
 #import "RNFirebaseMessaging.h"
 
 #import "AppDelegate.h"
+#import "Secrets.h"
 
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
@@ -20,7 +21,7 @@
   [FIRApp configure];
   [RNFirebaseNotifications configure];
   NSURL *jsCodeLocation;
-
+  [GMSServices provideAPIKey:_API_KEY_GOOGLE_];
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
 //  jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
 

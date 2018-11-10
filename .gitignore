@@ -20,7 +20,7 @@ DerivedData
 *.hmap
 *.ipa
 *.xcuserstate
-project.xcworkspace
+# project.xcworkspace
 
 # Android/IntelliJ
 #
@@ -29,6 +29,7 @@ build/
 .gradle
 local.properties
 *.iml
+android/gradle.properties
 
 # node.js
 #
@@ -51,6 +52,10 @@ buck-out/
 ios/fastlane/report.xml
 ios/fastlane/Preview.html
 ios/fastlane/screenshots
+ios/screenshots/
+ios/fastlane
+ios/FastlaneSnapshot/*
+ios/YelpPeru.xcodeproj/xcshareddata/xcschemes/FastlaneSnapshot.xcscheme
 
 # Bundle artifact
 *.jsbundle
@@ -74,12 +79,13 @@ my-release-key.keystore
 *.dSYM.zip
 *.app.dSYM.zip
 
-# ignoring keys
-**/*/strings.xml
-strings.xml
+# xcode google maps credentials
+Secrets.h
+secrets.xml
+
+# enviroment variables
+.env
 
 
-# bundle
-index.android.bundle
-index.android.bundle.meta
-*.jsbundle.meta
+# publish settings
+secure/

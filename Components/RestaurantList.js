@@ -13,6 +13,8 @@ import LogoTitle from "./LogoTitle";
 
 import { generateLinkGoogle } from "./utils.js";
 
+import {_API_KEY_GOOGLE_} from 'react-native-dotenv';
+
 class DisplayItemList extends Component {
   state = {
     source: require("../img/photo-placeholder-small.png")
@@ -37,7 +39,7 @@ class DisplayItemList extends Component {
   componentWillMount() {
     const { photo_reference } = this.props;
     if (photo_reference !== " ") {
-      const link = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=150&maxheight=150&key=AIzaSyBRk4uEysUxoObBmGAzmz3eEbq_O48E7xg&photoreference=${photo_reference}`;
+      const link = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=150&maxheight=150&key=${_API_KEY_GOOGLE_}&photoreference=${photo_reference}`;
       fetch(link).then(data => {
         this.setState({
           source: { uri: data.url }
@@ -143,17 +145,21 @@ export default class RestaurantList extends Component {
       generateLinkGoogle
     } = this.props.navigation.getParam("fetch", {});
     if (fetching) {
-      fetch.then(data => data.json()).then(data => {
-        this.setState(
-          {
-            completeList: [...data.results],
-            nextPageToken: data.next_page_token || "",
-            lat,
-            long
-          },
-          this.handleLoadMore
-        );
-      });
+      fetch
+        .then(data => data.json())
+        .then(data => {
+          
+          this.setState(
+            {
+              completeList: [...data.results],
+              nextPageToken: data.next_page_token || "",
+              lat,
+              long
+            },
+            this.handleLoadMore
+          );
+        })
+        .catch(e => console.log('RestaurantList', e));
       return;
     }
     this.setState(
@@ -165,6 +171,11 @@ export default class RestaurantList extends Component {
   }
 
   render() {
+    const {
+      partialRestaurantList,
+      lat,
+      long,
+    } = this.state;
     return (
       <View style={styles.bodyResultsContainer}>
         <FlatList
@@ -177,15 +188,15 @@ export default class RestaurantList extends Component {
               <DisplayItemList
                 navigation={this.props.navigation}
                 item={item}
-                lat={this.state.lat}
-                long={this.state.long}
+                lat={lat}
+                long={long}
                 photo_reference={photo_reference}
               />
             );
           }}
           onEndReachedThreshold={0.25}
           onEndReached={this.handleLoadMore}
-          data={this.state.partialRestaurantList}
+          data={partialRestaurantList}
         />
       </View>
     );

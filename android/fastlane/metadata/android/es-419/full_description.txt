@@ -1,0 +1,20 @@
+Busca restaurantes recomendados por Google alrededor de tu zona. Usa palabras clave como 'ceviche', 'pollo', etc., como también nombres de restaurantes para encontrar resultados.
+
+La lista de resultados es ordenado en base a la importancia que esta tiene considerando varios factores como distancia, ranking, comentarios, frecuencia y precio.
+
+Esta aplicación tiene las siguientes funcionalidades:
+
+- Buscar restaurantes por palabras clave como ‘polleria', 'cevicheria', 'chifa', etc.
+- Encontrar restaurantes por sus nombres propios
+- LISTA DE RESTAURANTES basados en palabras claves
+- Obtener FOTOS REALES de otros usuarios que ya visitaron el lugar
+- Leer COMENTARIOS REALES sobre lo que otros usuarios opinan de dicho lugar
+- Pedir DIRECCIONES DE NAVEGACIÓN para llegar a dicho lugar
+- OBTENER EL TELÉFONO del establecimiento para realizar preguntas específicas
+
+Si tienes algún comentario, feedback u opinión con respecto a esta aplicación, no dudes en escribirme a lee.marreros@pucp.pe
+
+Buen provecho comensal!
+Buen día!
+
+SM

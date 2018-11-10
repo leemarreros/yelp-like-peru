@@ -26,6 +26,9 @@
 		82E5F205715844649B849E21 /* libRNFirebase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C634B8FF0B84F4BA0377EC4 /* libRNFirebase.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		9F75EF022152082A006F3670 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9F75EF012152082A006F3670 /* GoogleService-Info.plist */; };
+		9FB8349E218C880E009E6DC2 /* FastlaneSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB8349D218C880E009E6DC2 /* FastlaneSnapshot.swift */; };
+		9FB834CC218C8A3C009E6DC2 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB834CB218C8A3C009E6DC2 /* SnapshotHelper.swift */; };
+		9FB834CF218D3A26009E6DC2 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 /* End PBXBuildFile section */
 
@@ -296,6 +299,20 @@
 			remoteGlobalIDString = 134814201AA4EA6300B7C361;
 			remoteInfo = RNFirebase;
 		};
+		9FB834A0218C880E009E6DC2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
+			remoteInfo = YelpPeru;
+		};
+		9FB834CD218C9FCD009E6DC2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 83CBBA2D1A601D0E00E9B192;
+			remoteInfo = React;
+		};
 		ADBDB9261DFEBF0700ED6528 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */;
@@ -331,6 +348,11 @@
 		7C634B8FF0B84F4BA0377EC4 /* libRNFirebase.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFirebase.a; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		9F75EF012152082A006F3670 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9FA48CAF2193DD48004D5601 /* Secrets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Secrets.h; path = YelpPeru/Secrets.h; sourceTree = "<group>"; };
+		9FB8349B218C880E009E6DC2 /* FastlaneSnapshot.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FastlaneSnapshot.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9FB8349D218C880E009E6DC2 /* FastlaneSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastlaneSnapshot.swift; sourceTree = "<group>"; };
+		9FB8349F218C880E009E6DC2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9FB834CB218C8A3C009E6DC2 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapshotHelper.swift; path = fastlane/SnapshotHelper.swift; sourceTree = SOURCE_ROOT; };
 		9FDF43792152071A00CCE70F /* YelpPeru.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = YelpPeru.entitlements; path = YelpPeru/YelpPeru.entitlements; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		B2604FFEE04D479381432400 /* RNFirebase.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFirebase.xcodeproj; path = "../node_modules/react-native-firebase/ios/RNFirebase.xcodeproj"; sourceTree = "<group>"; };
@@ -366,6 +388,14 @@
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				BD6351D14F7C2C71360A7B25 /* libPods-YelpPeru.a in Frameworks */,
 				82E5F205715844649B849E21 /* libRNFirebase.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9FB83498218C880E009E6DC2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9FB834CF218D3A26009E6DC2 /* libReact.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -454,6 +484,7 @@
 		13B07FAE1A68108700A75B9A /* YelpPeru */ = {
 			isa = PBXGroup;
 			children = (
+				9FA48CAF2193DD48004D5601 /* Secrets.h */,
 				9F75EF012152082A006F3670 /* GoogleService-Info.plist */,
 				9FDF43792152071A00CCE70F /* YelpPeru.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
@@ -551,6 +582,7 @@
 				13B07FAE1A68108700A75B9A /* YelpPeru */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* YelpPeruTests */,
+				9FB8349C218C880E009E6DC2 /* FastlaneSnapshot */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				8A5BB6FBB58216798A4DACFC /* Pods */,
@@ -566,6 +598,7 @@
 			children = (
 				13B07F961A680F5B00A75B9A /* YelpPeru.app */,
 				00E356EE1AD99517003FC87E /* YelpPeruTests.xctest */,
+				9FB8349B218C880E009E6DC2 /* FastlaneSnapshot.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -593,6 +626,16 @@
 				9F75EF512152097C006F3670 /* libRNFirebase.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		9FB8349C218C880E009E6DC2 /* FastlaneSnapshot */ = {
+			isa = PBXGroup;
+			children = (
+				9FB834CB218C8A3C009E6DC2 /* SnapshotHelper.swift */,
+				9FB8349D218C880E009E6DC2 /* FastlaneSnapshot.swift */,
+				9FB8349F218C880E009E6DC2 /* Info.plist */,
+			);
+			path = FastlaneSnapshot;
 			sourceTree = "<group>";
 		};
 		ADBDB9201DFEBF0600ED6528 /* Products */ = {
@@ -643,12 +686,32 @@
 			productReference = 13B07F961A680F5B00A75B9A /* YelpPeru.app */;
 			productType = "com.apple.product-type.application";
 		};
+		9FB8349A218C880E009E6DC2 /* FastlaneSnapshot */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9FB834CA218C880E009E6DC2 /* Build configuration list for PBXNativeTarget "FastlaneSnapshot" */;
+			buildPhases = (
+				9FB83497218C880E009E6DC2 /* Sources */,
+				9FB83498218C880E009E6DC2 /* Frameworks */,
+				9FB83499218C880E009E6DC2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9FB834CE218C9FCD009E6DC2 /* PBXTargetDependency */,
+				9FB834A1218C880E009E6DC2 /* PBXTargetDependency */,
+			);
+			name = FastlaneSnapshot;
+			productName = FastlaneSnapshot;
+			productReference = 9FB8349B218C880E009E6DC2 /* FastlaneSnapshot.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0940;
 				LastUpgradeCheck = 610;
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
@@ -669,6 +732,12 @@
 								enabled = 1;
 							};
 						};
+					};
+					9FB8349A218C880E009E6DC2 = {
+						CreatedOnToolsVersion = 9.4.1;
+						DevelopmentTeam = G89HVVK364;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 				};
 			};
@@ -741,6 +810,7 @@
 			targets = (
 				13B07F861A680F5B00A75B9A /* YelpPeru */,
 				00E356ED1AD99517003FC87E /* YelpPeruTests */,
+				9FB8349A218C880E009E6DC2 /* FastlaneSnapshot */,
 			);
 		};
 /* End PBXProject section */
@@ -1032,6 +1102,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9FB83499218C880E009E6DC2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -1105,6 +1182,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9FB83497218C880E009E6DC2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9FB8349E218C880E009E6DC2 /* FastlaneSnapshot.swift in Sources */,
+				9FB834CC218C8A3C009E6DC2 /* SnapshotHelper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1112,6 +1198,16 @@
 			isa = PBXTargetDependency;
 			target = 13B07F861A680F5B00A75B9A /* YelpPeru */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
+		};
+		9FB834A1218C880E009E6DC2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 13B07F861A680F5B00A75B9A /* YelpPeru */;
+			targetProxy = 9FB834A0218C880E009E6DC2 /* PBXContainerItemProxy */;
+		};
+		9FB834CE218C9FCD009E6DC2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = React;
+			targetProxy = 9FB834CD218C9FCD009E6DC2 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1326,6 +1422,87 @@
 			};
 			name = Release;
 		};
+		9FB834A2218C880E009E6DC2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = G89HVVK364;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../node_modules/react-native/React/**";
+				INFOPLIST_FILE = FastlaneSnapshot/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.peru.dondecomer.FastlaneSnapshot;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "53e55f58-de0c-418b-a111-422aaf57dfd3";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = YelpPeru;
+			};
+			name = Debug;
+		};
+		9FB834A3218C880E009E6DC2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = G89HVVK364;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../node_modules/react-native/React/**";
+				INFOPLIST_FILE = FastlaneSnapshot/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.peru.dondecomer.FastlaneSnapshot;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "53e55f58-de0c-418b-a111-422aaf57dfd3";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = YelpPeru;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1352,6 +1529,15 @@
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,
 				83CBBA211A601CBA00E9B192 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9FB834CA218C880E009E6DC2 /* Build configuration list for PBXNativeTarget "FastlaneSnapshot" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9FB834A2218C880E009E6DC2 /* Debug */,
+				9FB834A3218C880E009E6DC2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
