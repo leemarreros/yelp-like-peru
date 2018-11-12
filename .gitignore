@@ -53,14 +53,13 @@ ios/fastlane/Preview.html
 ios/fastlane/screenshots
 ios/screenshots/
 ios/fastlane
-ios/FastlaneSnapshot/*
-ios/YelpPeru.xcodeproj/xcshareddata/xcschemes/FastlaneSnapshot.xcscheme
 
 # Bundle artifact
 *.jsbundle
 
 # ignoring file with keys
 keys.js
+ios/YelpPeru.xcodeproj/xcshareddata/xcschemes/FastlaneSnapshot.xcscheme
 
 # ignoring ios/Pods
 ios/Pods/
@@ -84,3 +83,6 @@ secrets.xml
 
 # enviroment variables
 .env
+
+# deployment
+android/secure/
