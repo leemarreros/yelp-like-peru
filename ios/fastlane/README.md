@@ -36,6 +36,11 @@ Makes an ipa adhoc for qa
 fastlane ios installdevice
 ```
 
+### ios buildapp
+```
+fastlane ios buildapp
+```
+
 
 ----
 

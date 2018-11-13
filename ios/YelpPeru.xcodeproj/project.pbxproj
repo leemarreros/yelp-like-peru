@@ -349,8 +349,8 @@
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		7C634B8FF0B84F4BA0377EC4 /* libRNFirebase.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFirebase.a; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		9F4DE9022199110B00D5E1A7 /* Secrets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Secrets.h; path = YelpPeru/Secrets.h; sourceTree = "<group>"; };
 		9F75EF012152082A006F3670 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		9FA48CAF2193DD48004D5601 /* Secrets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Secrets.h; path = YelpPeru/Secrets.h; sourceTree = "<group>"; };
 		9FB8349B218C880E009E6DC2 /* FastlaneSnapshot.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FastlaneSnapshot.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FB8349D218C880E009E6DC2 /* FastlaneSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastlaneSnapshot.swift; sourceTree = "<group>"; };
 		9FB8349F218C880E009E6DC2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -486,7 +486,7 @@
 		13B07FAE1A68108700A75B9A /* YelpPeru */ = {
 			isa = PBXGroup;
 			children = (
-				9FA48CAF2193DD48004D5601 /* Secrets.h */,
+				9F4DE9022199110B00D5E1A7 /* Secrets.h */,
 				9F75EF012152082A006F3670 /* GoogleService-Info.plist */,
 				9FDF43792152071A00CCE70F /* YelpPeru.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
@@ -1300,7 +1300,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Steve Marreros (8SP96E4JG4)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Steve Marreros (8SP96E4JG4)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 7;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = G89HVVK364;
 				HEADER_SEARCH_PATHS = (
@@ -1332,7 +1332,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Steve Marreros (G89HVVK364)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Steve Marreros (G89HVVK364)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = G89HVVK364;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
